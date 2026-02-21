@@ -1,5 +1,13 @@
 import { PixelCharacterData } from "./types";
 
+/** Thought bubble emojis by context */
+const THOUGHTS_BY_ZONE: Record<string, string[]> = {
+  food: ["🍔", "🌭", "🍕", "😋", "🧁"],
+  music: ["🎵", "🎶", "🎸", "💃", "🕺"],
+  games: ["🎯", "🏆", "💪", "🎉", "⭐"],
+  general: ["😊", "❤️", "☀️", "🎉", "👋", "✨", "🥳", "🎈"],
+};
+
 /** Internal state for each animated character */
 export interface MovingCharacter {
   id: string;
@@ -13,21 +21,13 @@ export interface MovingCharacter {
   speed: number;
   state: "idle" | "walking";
   facing: "left" | "right";
-  idleTimer: number; // ticks remaining in idle state
-  walkFrame: number; // alternates 0/1 for leg animation
+  idleTimer: number;
+  walkFrame: number;
   frameCounter: number;
+  // Thought bubble
+  thought: string | null;
+  thoughtTimer: number;
 }
-
-// Walkable bounds (grass area, avoiding rink interior and parking)
-const WALK_AREAS = {
-  // Around the rink perimeter (outside the boards)
-  topGrass: { x1: 5, y1: 58, x2: 555, y2: 72 },
-  bottomGrass: { x1: 5, y1: 258, x2: 555, y2: 360 },
-  leftGrass: { x1: 5, y1: 58, x2: 38, y2: 360 },
-  rightGrass: { x1: 522, y1: 58, x2: 555, y2: 360 },
-  // Inside the rink zones (characters can wander inside the event)
-  insideRink: { x1: 50, y1: 75, x2: 510, y2: 250 },
-};
 
 // Entrance gate location
 const ENTRANCE = { x: 280, y: 310 };
@@ -42,32 +42,37 @@ function randomTarget(type: PixelCharacterData["type"]): {
 
   switch (type) {
     case "rsvp":
-      // RSVP families wander inside the event
-      return {
-        x: rand(55, 500),
-        y: rand(80, 250),
-      };
+      return { x: rand(55, 500), y: rand(80, 250) };
     case "volunteer":
-      // Volunteers patrol everywhere
-      return {
-        x: rand(50, 510),
-        y: rand(70, 340),
-      };
+      return { x: rand(50, 510), y: rand(70, 340) };
     case "vendor":
-      // Vendors stay near the food/sponsor side
-      return {
-        x: rand(160, 510),
-        y: rand(80, 250),
-      };
+      return { x: rand(160, 510), y: rand(80, 250) };
     case "vip":
-      // VIPs wander near info booth and stage
-      return {
-        x: rand(300, 510),
-        y: rand(80, 240),
-      };
+      return { x: rand(300, 510), y: rand(80, 240) };
     default:
       return { x: rand(50, 500), y: rand(80, 340) };
   }
+}
+
+/** Determine what kind of thought a character should have based on position */
+function getThoughtForPosition(x: number, y: number): string {
+  // Near food vendors (170-280, 160-240)
+  if (x > 150 && x < 300 && y > 140 && y < 250) {
+    const pool = THOUGHTS_BY_ZONE.food;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+  // Near music stage (300-400, 170-240)
+  if (x > 280 && x < 420 && y > 150 && y < 250) {
+    const pool = THOUGHTS_BY_ZONE.music;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+  // Near yard games (300-390, 80-150)
+  if (x > 280 && x < 410 && y > 60 && y < 160) {
+    const pool = THOUGHTS_BY_ZONE.games;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+  const pool = THOUGHTS_BY_ZONE.general;
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
 /** Initialize a moving character from static data */
@@ -84,12 +89,14 @@ export function initMovingCharacter(
     color: char.color,
     type: char.type,
     name: char.name,
-    speed: 1.0 + Math.random() * 0.8, // brisk RCT walk ~1.0–1.8 px/tick
-    state: "walking", // start walking immediately so they look alive
+    speed: 1.0 + Math.random() * 0.8,
+    state: "walking",
     facing: target.x > char.x ? "right" : "left",
     idleTimer: 0,
     walkFrame: 0,
     frameCounter: 0,
+    thought: null,
+    thoughtTimer: 0,
   };
 }
 
@@ -113,6 +120,8 @@ export function spawnAtEntrance(
     idleTimer: 0,
     walkFrame: 0,
     frameCounter: 0,
+    thought: "🎉",
+    thoughtTimer: 60,
   };
 }
 
@@ -121,10 +130,23 @@ export function tickCharacters(chars: MovingCharacter[]): MovingCharacter[] {
   return chars.map((c) => {
     const next = { ...c, frameCounter: c.frameCounter + 1 };
 
+    // --- Thought bubble logic ---
+    if (next.thought !== null) {
+      next.thoughtTimer -= 1;
+      if (next.thoughtTimer <= 0) {
+        next.thought = null;
+        next.thoughtTimer = 0;
+      }
+    } else if (Math.random() < 0.002) {
+      // ~6% chance per second at 30fps → occasional thought bubbles
+      next.thought = getThoughtForPosition(c.x, c.y);
+      next.thoughtTimer = Math.floor(50 + Math.random() * 40); // 1.5–3 seconds
+    }
+
+    // --- Movement logic ---
     if (c.state === "idle") {
       next.idleTimer -= 1;
       if (next.idleTimer <= 0) {
-        // Start walking to a new target
         const target = randomTarget(c.type);
         next.targetX = target.x;
         next.targetY = target.y;
@@ -140,21 +162,18 @@ export function tickCharacters(chars: MovingCharacter[]): MovingCharacter[] {
     const dist = Math.sqrt(dx * dx + dy * dy);
 
     if (dist < 2) {
-      // Arrived — go idle
       next.state = "idle";
-      next.idleTimer = Math.floor(20 + Math.random() * 40); // short pauses
+      next.idleTimer = Math.floor(20 + Math.random() * 40);
       next.x = next.targetX;
       next.y = next.targetY;
       return next;
     }
 
-    // Move toward target
     const moveX = (dx / dist) * c.speed;
     const moveY = (dy / dist) * c.speed;
     next.x += moveX;
     next.y += moveY;
 
-    // Update facing direction
     if (Math.abs(dx) > 1) {
       next.facing = dx > 0 ? "right" : "left";
     }
