@@ -578,23 +578,33 @@ export default function PixelMap({ onZoneSelect, stats }: PixelMapProps) {
       <ellipse cx="350" cy="50" rx="70" ry="12" fill="#7A9A4A" opacity="0.1" />
       <ellipse cx="600" cy="60" rx="65" ry="10" fill="#6A8A3A" opacity="0.08" />
 
-      {/* White rock numbers on hillside */}
-      <text x="180" y="35" fontSize="48" fontFamily="Georgia, serif" fontWeight="900"
-        fill="#E8E0D0" opacity="0.65" letterSpacing="4"
-        transform="rotate(-6, 180, 35)" style={{ paintOrder: "stroke" }}
-        stroke="#D0C8B8" strokeWidth="1.5">113</text>
-      <text x="370" y="45" fontSize="44" fontFamily="Georgia, serif" fontWeight="900"
-        fill="#E8E0D0" opacity="0.6" letterSpacing="3"
-        transform="rotate(-4, 370, 45)" style={{ paintOrder: "stroke" }}
-        stroke="#D0C8B8" strokeWidth="1.2">51</text>
-      <text x="520" y="38" fontSize="48" fontFamily="Georgia, serif" fontWeight="900"
-        fill="#E8E0D0" opacity="0.62" letterSpacing="3"
-        transform="rotate(-5, 520, 38)" style={{ paintOrder: "stroke" }}
-        stroke="#D0C8B8" strokeWidth="1.4">137</text>
-      <text x="380" y="85" fontSize="42" fontFamily="Georgia, serif" fontWeight="900"
-        fill="#E8E0D0" opacity="0.55" letterSpacing="3"
-        transform="rotate(-3, 380, 85)" style={{ paintOrder: "stroke" }}
-        stroke="#D0C8B8" strokeWidth="1.2">151</text>
+      {/* Wildflower clusters on hillside */}
+      {[
+        { cx: 140, cy: 30, colors: ["#FFD700", "#FF6B6B", "#FF9ECD"] },
+        { cx: 260, cy: 50, colors: ["#C084FC", "#FFD700", "#87CEEB"] },
+        { cx: 400, cy: 25, colors: ["#FF6B6B", "#FFD700", "#C084FC"] },
+        { cx: 520, cy: 45, colors: ["#87CEEB", "#FF9ECD", "#FFD700"] },
+        { cx: 650, cy: 35, colors: ["#FFD700", "#C084FC", "#FF6B6B"] },
+        { cx: 180, cy: 70, colors: ["#FF9ECD", "#87CEEB", "#FFD700"] },
+        { cx: 340, cy: 80, colors: ["#FFD700", "#FF6B6B", "#87CEEB"] },
+        { cx: 500, cy: 75, colors: ["#C084FC", "#FFD700", "#FF9ECD"] },
+        { cx: 600, cy: 60, colors: ["#FF6B6B", "#FFD700", "#C084FC"] },
+      ].map((cluster, ci) => (
+        <g key={`hill-flower-${ci}`} opacity={0.7 + Math.random() * 0.15}>
+          {cluster.colors.map((color, fi) => {
+            const ox = (fi - 1) * 8;
+            const oy = fi === 1 ? -4 : 0;
+            return (
+              <g key={fi}>
+                <line x1={cluster.cx + ox} y1={cluster.cy + oy} x2={cluster.cx + ox} y2={cluster.cy + oy + 6}
+                  stroke="#5A8A3A" strokeWidth="1" opacity="0.6" />
+                <circle cx={cluster.cx + ox} cy={cluster.cy + oy} r="2.5" fill={color} />
+                <circle cx={cluster.cx + ox} cy={cluster.cy + oy} r="1" fill="#FFF" opacity="0.5" />
+              </g>
+            );
+          })}
+        </g>
+      ))}
 
       {/* Walking path on hillside */}
       <path d="M 340,-15 Q 350,20 380,50 Q 400,70 380,100"
