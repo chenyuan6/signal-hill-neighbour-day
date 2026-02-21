@@ -249,33 +249,45 @@ export async function getCharacters(): Promise<PixelCharacterData[]> {
     }
   );
 
-  rsvps.forEach((r, i) => {
+  // Simple hash to get repeatable "random" positions from id
+  const spread = (id: string, minX: number, maxX: number, minY: number, maxY: number) => {
+    let h = 0;
+    for (let j = 0; j < id.length; j++) h = (h * 31 + id.charCodeAt(j)) | 0;
+    const nx = Math.abs(h % 1000) / 1000;
+    const ny = Math.abs((h * 7 + 13) % 1000) / 1000;
+    return { x: minX + nx * (maxX - minX), y: minY + ny * (maxY - minY) };
+  };
+
+  rsvps.forEach((r) => {
+    const pos = spread(r.id, 60, 490, 85, 240);
     chars.push({
       id: r.id,
-      x: 30 + (i % 12) * 24,
-      y: 340 + Math.floor(i / 12) * 20,
+      x: pos.x,
+      y: pos.y,
       color: "#4ADE80",
       type: "rsvp",
       name: r.familyName,
     });
   });
 
-  volunteers.forEach((v, i) => {
+  volunteers.forEach((v) => {
+    const pos = spread(v.id, 55, 500, 75, 340);
     chars.push({
       id: v.id,
-      x: 60 + (i % 8) * 30,
-      y: 50 + Math.floor(i / 8) * 22,
+      x: pos.x,
+      y: pos.y,
       color: "#60A5FA",
       type: "volunteer",
       name: v.name,
     });
   });
 
-  vendors.forEach((v, i) => {
+  vendors.forEach((v) => {
+    const pos = spread(v.id, 170, 500, 90, 240);
     chars.push({
       id: v.id,
-      x: 380 + (i % 4) * 28,
-      y: 200 + Math.floor(i / 4) * 22,
+      x: pos.x,
+      y: pos.y,
       color: "#F472B6",
       type: "vendor",
       name: v.businessName,

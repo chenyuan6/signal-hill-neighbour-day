@@ -1,8 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { MapZone, PixelCharacterData } from "@/lib/types";
 import { getCharacters } from "@/lib/store";
+import {
+  MovingCharacter,
+  initMovingCharacter,
+  spawnAtEntrance,
+  tickCharacters,
+} from "@/lib/movement";
 import PixelCharacter from "./PixelCharacter";
 
 const ZONES: MapZone[] = [
@@ -96,13 +102,57 @@ const ZONES: MapZone[] = [
   },
 ];
 
+/** Tick rate: ~30 fps */
+const TICK_MS = 33;
+
+/** How often to poll Supabase for new signups (ms) */
+const POLL_MS = 8000;
+
 export default function PixelMap() {
-  const [characters, setCharacters] = useState<PixelCharacterData[]>([]);
+  const [movingChars, setMovingChars] = useState<MovingCharacter[]>([]);
   const [hoveredZone, setHoveredZone] = useState<MapZone | null>(null);
   const [selectedZone, setSelectedZone] = useState<MapZone | null>(null);
 
+  // Keep track of known IDs so we can detect new signups
+  const knownIds = useRef<Set<string>>(new Set());
+
+  // Load initial characters → initialize movement state
+  const loadCharacters = useCallback(async (isInitial: boolean) => {
+    const rawChars = await getCharacters();
+
+    if (isInitial) {
+      // First load: place them all at their generated positions and start wandering
+      const moving = rawChars.map((c) => initMovingCharacter(c));
+      knownIds.current = new Set(rawChars.map((c) => c.id));
+      setMovingChars(moving);
+    } else {
+      // Subsequent loads: find new characters and spawn them at the entrance
+      const newChars = rawChars.filter((c) => !knownIds.current.has(c.id));
+      if (newChars.length > 0) {
+        const spawned = newChars.map((c) => spawnAtEntrance(c));
+        newChars.forEach((c) => knownIds.current.add(c.id));
+        setMovingChars((prev) => [...prev, ...spawned]);
+      }
+    }
+  }, []);
+
+  // Initial load
   useEffect(() => {
-    getCharacters().then(setCharacters);
+    loadCharacters(true);
+  }, [loadCharacters]);
+
+  // Poll for new signups
+  useEffect(() => {
+    const interval = setInterval(() => loadCharacters(false), POLL_MS);
+    return () => clearInterval(interval);
+  }, [loadCharacters]);
+
+  // Animation tick loop
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMovingChars((prev) => tickCharacters(prev));
+    }, TICK_MS);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -315,24 +365,27 @@ export default function PixelMap() {
           </g>
         ))}
 
-        {/* RSVP waiting area label */}
-        {characters.filter((c) => c.type === "rsvp").length > 0 && (
-          <text
-            x="130"
-            y="338"
-            textAnchor="middle"
-            fill="#4ADE80"
-            fontSize="6"
-            fontFamily="monospace"
-          >
-            RSVP&apos;d families waiting!
-          </text>
-        )}
-
-        {/* Characters */}
-        {characters.map((char, i) => (
-          <PixelCharacter key={char.id} character={char} index={i} />
+        {/* Animated characters */}
+        {movingChars.map((mc, i) => (
+          <PixelCharacter key={mc.id} char={mc} index={i} />
         ))}
+
+        {/* Character count badge */}
+        {movingChars.length > 0 && (
+          <g>
+            <rect x="340" y="330" width="100" height="18" rx="3" fill="#0F172A" opacity="0.8" />
+            <text
+              x="390"
+              y="343"
+              textAnchor="middle"
+              fill="#4ADE80"
+              fontSize="6"
+              fontFamily="monospace"
+            >
+              {movingChars.length} at the event!
+            </text>
+          </g>
+        )}
 
         {/* Title banner */}
         <rect x="120" y="370" width="320" height="35" fill="#0F172A" rx="4" />
