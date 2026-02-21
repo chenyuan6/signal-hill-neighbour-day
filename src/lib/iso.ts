@@ -4,13 +4,13 @@ export const TILE_W = 48;
 export const TILE_H = 24;
 export const HALF_W = TILE_W / 2;
 export const HALF_H = TILE_H / 2;
-export const GRID_COLS = 16;
-export const GRID_ROWS = 10;
+export const GRID_COLS = 10;
+export const GRID_ROWS = 16;
 
 // Origin: top vertex of the isometric diamond
-// Calculated so diamond is centered in an 800-wide viewport at x=480
-export const ORIGIN_X = 408;
-export const ORIGIN_Y = 40;
+// Adjusted for the rotated 10×16 grid, centered in viewport
+export const ORIGIN_X = 540;
+export const ORIGIN_Y = 130;
 
 /** Convert grid (col, row) to SVG screen (x, y) */
 export function gridToScreen(col: number, row: number) {
@@ -77,9 +77,7 @@ export function isoBuildingPolys(
   };
 }
 
-/** Get a point on the left wall at normalized position (u, v)
- *  u: 0=left edge, 1=right edge of wall
- *  v: 0=bottom, 1=top of wall */
+/** Get a point on the left wall at normalized position (u, v) */
 export function leftWallPoint(
   gx: number, gy: number, gw: number, gd: number, h: number,
   u: number, v: number
@@ -92,9 +90,7 @@ export function leftWallPoint(
   };
 }
 
-/** Get a point on the right wall at normalized position (u, v)
- *  u: 0=left edge, 1=right edge of wall
- *  v: 0=bottom, 1=top of wall */
+/** Get a point on the right wall at normalized position (u, v) */
 export function rightWallPoint(
   gx: number, gy: number, gw: number, gd: number, h: number,
   u: number, v: number

@@ -144,7 +144,7 @@ export default function RSVPPage() {
       </form>
 
       <p className="text-[7px] text-[#64748B] text-center">
-        June 21, 2026 &bull; 11AM - 4PM &bull; 489 Sienna Park Dr SW
+        June 20, 2026 &bull; 11AM - 4PM &bull; 489 Sienna Park Dr SW
       </p>
     </div>
   );

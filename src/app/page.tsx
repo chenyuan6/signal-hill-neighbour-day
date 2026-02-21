@@ -29,7 +29,7 @@ function StatPill({ value, target, label, color }: {
 export default function Home() {
   const [stats, setStats] = useState({ rsvps: 0, volunteers: 0, vendors: 0 });
   const [selectedZone, setSelectedZone] = useState<{
-    id: string; label: string; description: string;
+    id: string; label: string; description: string; available?: boolean;
   } | null>(null);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function Home() {
               Signal Hill Neighbour Day
             </div>
             <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#94A3B8", fontWeight: 400 }}>
-              June 21, 2026
+              June 20, 2026
             </div>
           </div>
         </div>
@@ -102,19 +102,28 @@ export default function Home() {
           background: "linear-gradient(180deg, #87CEEB 0%, #B0E0F0 35%, #C8ECD0 55%, #1A5C10 55%, #163F0E 100%)",
         }}
       >
-        <PixelMap onZoneSelect={setSelectedZone} />
+        <PixelMap onZoneSelect={setSelectedZone} stats={stats} />
 
         {/* Zone info card */}
         {selectedZone && (
           <div className="zone-card absolute top-4 right-4 w-64 p-4 z-30">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#4ADE80" }}>
-                  {selectedZone.label}
+                <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: selectedZone.available ? "#94A3B8" : "#4ADE80" }}>
+                  {selectedZone.available ? "Available Vendor Spot" : selectedZone.label}
                 </h3>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#94A3B8", marginTop: 4, lineHeight: 1.5 }}>
                   {selectedZone.description}
                 </p>
+                {selectedZone.available && (
+                  <Link
+                    href="/vendor"
+                    className="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 rounded-md text-[#052E16] transition-all hover:brightness-110"
+                    style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 700, background: "#4ADE80" }}
+                  >
+                    Apply as Vendor →
+                  </Link>
+                )}
               </div>
               <button
                 onClick={() => setSelectedZone(null)}
@@ -131,7 +140,7 @@ export default function Home() {
       {/* ═══ BOTTOM BAR ═══ */}
       <div className="hud-bar h-9 border-t flex items-center px-4 gap-4 shrink-0 z-20">
         <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: "#FFE066" }}>
-          June 21, 2026
+          June 20, 2026
         </span>
         <div className="w-px h-4 bg-white/10" />
         <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "#94A3B8" }}>

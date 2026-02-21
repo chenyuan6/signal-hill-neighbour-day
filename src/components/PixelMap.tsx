@@ -29,98 +29,126 @@ interface IsoZone {
   h: number;
   colors: { roof: string; leftWall: string; rightWall: string };
   description: string;
+  available?: boolean; // true = open vendor spot, no one signed up yet
+  suggestion?: string; // suggested booth theme for available spots
 }
 
 const ISO_ZONES: IsoZone[] = [
-  {
-    id: "bouncy", label: "Bouncy Castles",
-    gx: 0.5, gy: 0.5, gw: 3, gd: 2, h: 28,
-    colors: { roof: "#EF4444", leftWall: "#DC2626", rightWall: "#B91C1C" },
-    description: "Inflatable fun for kids of all ages!",
-  },
-  {
-    id: "facepainting", label: "Face Painting",
-    gx: 4, gy: 0.5, gw: 2.5, gd: 2, h: 16,
-    colors: { roof: "#C084FC", leftWall: "#A855F7", rightWall: "#9333EA" },
-    description: "Get your face painted by local artists",
-  },
-  {
-    id: "games", label: "Yard Games",
-    gx: 7, gy: 0.5, gw: 3, gd: 2, h: 14,
-    colors: { roof: "#4ADE80", leftWall: "#22C55E", rightWall: "#16A34A" },
-    description: "Cornhole, ladder toss, and more",
-  },
+  // ─── Near entrance (top of rink) — SHCA Info table ───
   {
     id: "info", label: "SHCA Info",
-    gx: 11, gy: 0.5, gw: 3.5, gd: 2.5, h: 20,
+    gx: 3, gy: 0.5, gw: 3, gd: 2, h: 16,
     colors: { roof: "#60A5FA", leftWall: "#3B82F6", rightWall: "#2563EB" },
-    description: "Community info & membership signup",
+    description: "Signal Hill Community Association – info, membership & welcome!",
+  },
+  // ─── Upper area (gy 3-5) ───
+  {
+    id: "spot-1", label: "Available Spot",
+    gx: 0.5, gy: 3, gw: 2.5, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Perfect for kids activities, bounce houses, or crafts!",
+    available: true, suggestion: "Kids Activity",
   },
   {
-    id: "petting", label: "Petting Zoo",
-    gx: 0.5, gy: 4, gw: 3, gd: 2, h: 10,
-    colors: { roof: "#FDE047", leftWall: "#FACC15", rightWall: "#EAB308" },
-    description: "Meet friendly farm animals",
+    id: "spot-2", label: "Available Spot",
+    gx: 4, gy: 3, gw: 2.5, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Great for a local artisan, face painter, or henna artist!",
+    available: true, suggestion: "Arts & Crafts",
   },
   {
-    id: "food", label: "Food Vendors",
-    gx: 4, gy: 3.5, gw: 3, gd: 2.5, h: 18,
-    colors: { roof: "#FB923C", leftWall: "#F97316", rightWall: "#EA580C" },
-    description: "Local food trucks and BBQ",
+    id: "spot-3", label: "Available Spot",
+    gx: 7, gy: 3, gw: 2.5, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Ideal for yard games, sports demos, or fitness activities!",
+    available: true, suggestion: "Games & Fun",
+  },
+  // ─── Middle area (gy 7-9) ───
+  {
+    id: "spot-4", label: "Available Spot",
+    gx: 0.5, gy: 7, gw: 2.5, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Perfect for pet services, animal rescue, or a petting zoo!",
+    available: true, suggestion: "Pet Friendly",
   },
   {
-    id: "stage", label: "Music Stage",
-    gx: 7.5, gy: 4, gw: 3, gd: 2.5, h: 24,
-    colors: { roof: "#38BDF8", leftWall: "#0EA5E9", rightWall: "#0284C7" },
-    description: "Live music all day long",
+    id: "spot-5", label: "Available Spot",
+    gx: 3.5, gy: 7, gw: 3, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Ideal for food trucks, BBQ, lemonade, or bake sales!",
+    available: true, suggestion: "Food & Drink",
   },
   {
-    id: "sponsors", label: "Sponsors",
-    gx: 11, gy: 4, gw: 3, gd: 2, h: 16,
-    colors: { roof: "#F472B6", leftWall: "#EC4899", rightWall: "#DB2777" },
-    description: "Meet our amazing community sponsors",
+    id: "spot-6", label: "Available Spot",
+    gx: 7, gy: 7, gw: 2.5, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Great for live music, DJ, or entertainment performances!",
+    available: true, suggestion: "Entertainment",
+  },
+  // ─── Lower area (gy 11-13) ───
+  {
+    id: "spot-7", label: "Available Spot",
+    gx: 0.5, gy: 11, gw: 2.5, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Open for health & wellness, yoga, or fitness demos!",
+    available: true, suggestion: "Wellness",
+  },
+  {
+    id: "spot-8", label: "Available Spot",
+    gx: 3.5, gy: 11, gw: 3, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Perfect for sponsors, local businesses, or community groups!",
+    available: true, suggestion: "Sponsor Booth",
+  },
+  {
+    id: "spot-9", label: "Available Spot",
+    gx: 7, gy: 11, gw: 2.5, gd: 2, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Prime location in the rink — great for any vendor!",
+    available: true, suggestion: "Local Biz",
+  },
+  // ─── Bottom area (gy 14-15) ───
+  {
+    id: "spot-10", label: "Available Spot",
+    gx: 3, gy: 14, gw: 3, gd: 1.5, h: 14,
+    colors: { roof: "#94A3B8", leftWall: "#64748B", rightWall: "#475569" },
+    description: "Excellent spot for community groups or sponsors!",
+    available: true, suggestion: "Open",
   },
 ];
 
-// ─── Path tile coordinates (grid positions that are paths) ─────
+// ─── Path tile coordinates for 10×16 grid ─────
 function isPathTile(col: number, row: number): boolean {
-  // Main horizontal path at row 3
-  if (row === 3 && col >= 0 && col < 16) return true;
-  // Vertical center path from row 3 to row 8
-  if (col === 8 && row >= 3 && row <= 8) return true;
-  // Cross connectors to zones (top row)
-  if (row === 2 && (col === 2 || col === 5 || col === 8 || col === 12)) return true;
-  // Cross connectors to zones (bottom row)
-  if (row === 5 && (col === 2 || col === 5 || col === 9 || col === 12)) return true;
-  // Left and right vertical connectors
-  if (col === 2 && row >= 2 && row <= 5) return true;
-  if (col === 12 && row >= 2 && row <= 5) return true;
-  // Entrance path
-  if (col === 8 && row >= 8 && row <= 9) return true;
-  if (col === 7 && row >= 8 && row <= 9) return true;
+  // Entrance path from top (col 4-5, row 0-2)
+  if ((col === 4 || col === 5) && row >= 0 && row <= 2) return true;
+  // Main vertical path down center (col 5, row 2-15)
+  if (col === 5 && row >= 2 && row <= 15) return true;
+  // Horizontal connectors at various rows
+  if (row === 2 && col >= 0 && col < 10) return true;  // top cross path
+  if (row === 6 && col >= 0 && col < 10) return true;  // middle cross path
+  if (row === 10 && col >= 0 && col < 10) return true; // lower cross path
+  if (row === 13 && col >= 2 && col <= 8) return true;  // bottom connector
   return false;
 }
 
-// ─── Tree positions (grid coords) ──────────────────────────────
+// ─── Tree positions — around perimeter of the rink ───
 const TREE_POSITIONS: { gx: number; gy: number; size: number }[] = [
-  // South tree line
-  { gx: 0.5, gy: 8, size: 1.1 },
-  { gx: 2, gy: 8.5, size: 1.3 },
-  { gx: 3.5, gy: 9, size: 0.9 },
-  { gx: 5, gy: 8.5, size: 1.1 },
-  { gx: 10, gy: 8, size: 1.0 },
-  { gx: 12, gy: 8.5, size: 1.2 },
-  { gx: 14, gy: 9, size: 0.9 },
-  { gx: 15.5, gy: 8.5, size: 1.0 },
-  // East edge
-  { gx: 15.5, gy: 1.5, size: 0.9 },
-  { gx: 16, gy: 3, size: 1.0 },
-  { gx: 15.5, gy: 5.5, size: 1.1 },
-  { gx: 16, gy: 7, size: 0.8 },
-  // West edge
-  { gx: -0.5, gy: 2, size: 1.0 },
-  { gx: -0.5, gy: 5, size: 0.9 },
-  { gx: -0.5, gy: 7, size: 1.1 },
+  // South/bottom edge (high gy)
+  { gx: 1, gy: 16, size: 1.1 },
+  { gx: 3, gy: 16.5, size: 1.3 },
+  { gx: 5, gy: 16.8, size: 0.9 },
+  { gx: 7, gy: 16.5, size: 1.0 },
+  { gx: 9, gy: 16, size: 1.1 },
+  // West/left edge (low gx)
+  { gx: -0.5, gy: 3, size: 1.0 },
+  { gx: -0.8, gy: 6, size: 1.1 },
+  { gx: -0.5, gy: 9, size: 0.9 },
+  { gx: -0.8, gy: 12, size: 1.0 },
+  { gx: -0.5, gy: 15, size: 0.9 },
+  // East/right edge (high gx)
+  { gx: 10.3, gy: 4, size: 0.8 },
+  { gx: 10.5, gy: 8, size: 0.9 },
+  { gx: 10.3, gy: 12, size: 0.8 },
 ];
 
 // ─── Tiny isometric guest (smooth, rounded ~8px tall) ──────────
@@ -231,220 +259,41 @@ function IsoTree({ gx, gy, size }: { gx: number; gy: number; size: number }) {
   );
 }
 
-// ─── Zone ground decorations (tables, equipment under tents) ──
+// ─── Zone ground decorations (SHCA table only — all other spots are available) ──
 function BuildingDecor({ zone }: { zone: IsoZone }) {
-  const { gx, gy, gw, gd, h } = zone;
-  const polys = isoBuildingPolys(gx, gy, gw, gd, h);
-
-  // Helper: place a table at normalized position within the zone footprint
+  if (zone.id !== "info") return null;
+  const polys = isoBuildingPolys(zone.gx, zone.gy, zone.gw, zone.gd, zone.h);
   const tableAt = (u: number, v: number, color: string) => {
     const cx = polys.topCorner.x + u * (polys.rightCorner.x - polys.topCorner.x) + v * (polys.leftCorner.x - polys.topCorner.x);
     const cy = polys.topCorner.y + u * (polys.rightCorner.y - polys.topCorner.y) + v * (polys.leftCorner.y - polys.topCorner.y);
     return (
       <g>
-        {/* Table shadow */}
         <ellipse cx={cx} cy={cy + 2} rx="5" ry="2" fill="#000" opacity="0.06" />
-        {/* Table top (iso diamond) */}
         <polygon
           points={`${cx},${cy - 3} ${cx + 5},${cy - 1} ${cx},${cy + 1} ${cx - 5},${cy - 1}`}
           fill={color} stroke="rgba(0,0,0,0.15)" strokeWidth="0.3"
         />
-        {/* Table legs */}
         <line x1={cx - 3} y1={cy - 1} x2={cx - 3} y2={cy + 2} stroke="#6B4226" strokeWidth="0.6" />
         <line x1={cx + 3} y1={cy - 1} x2={cx + 3} y2={cy + 2} stroke="#6B4226" strokeWidth="0.6" />
       </g>
     );
   };
-
-  switch (zone.id) {
-    case "info":
-      return (
-        <g>
-          {/* Info table with banner */}
-          {tableAt(0.45, 0.45, "#BFDBFE")}
-          {tableAt(0.7, 0.6, "#DBEAFE")}
-          {/* SHCA Banner hanging from canopy */}
-          <rect x={polys.roofCenter.x - 12} y={polys.roofCenter.y - 6} width="24" height="8" rx="1.5"
-            fill="#F8FAFC" opacity="0.9" />
-          <text x={polys.roofCenter.x} y={polys.roofCenter.y + 0.5} textAnchor="middle"
-            fill="#1D4ED8" fontSize="5" fontFamily="system-ui, sans-serif" fontWeight="800">SHCA</text>
-          {/* Flag pole */}
-          <line x1={polys.rTopCorner.x + 8} y1={polys.rTopCorner.y}
-            x2={polys.rTopCorner.x + 8} y2={polys.rTopCorner.y - 16}
-            stroke="#475569" strokeWidth="0.8" />
-          <polygon
-            points={`${polys.rTopCorner.x + 9},${polys.rTopCorner.y - 16} ${polys.rTopCorner.x + 16},${polys.rTopCorner.y - 13.5} ${polys.rTopCorner.x + 9},${polys.rTopCorner.y - 11}`}
-            fill="#2563EB" />
-        </g>
-      );
-    case "bouncy":
-      return (
-        <g>
-          {/* Inflatable bounce pad on ground */}
-          <polygon
-            points={`${polys.topCorner.x},${polys.topCorner.y + 2} ${polys.rightCorner.x - 8},${polys.rightCorner.y + 2} ${polys.bottomCorner.x},${polys.bottomCorner.y} ${polys.leftCorner.x + 8},${polys.leftCorner.y}`}
-            fill="#EF4444" opacity="0.35" rx="4"
-          />
-          {/* Puffy sides */}
-          <ellipse cx={polys.roofCenter.x - 10} cy={polys.bottomCorner.y - 2} rx="8" ry="4"
-            fill="#F87171" opacity="0.5" />
-          <ellipse cx={polys.roofCenter.x + 10} cy={polys.bottomCorner.y - 4} rx="8" ry="4"
-            fill="#FCA5A5" opacity="0.4" />
-          {/* Turrets/castle detail on ground */}
-          <rect x={polys.roofCenter.x - 12} y={polys.bottomCorner.y - 12} width="5" height="8" rx="1"
-            fill="#F87171" opacity="0.6" />
-          <rect x={polys.roofCenter.x + 7} y={polys.bottomCorner.y - 10} width="5" height="7" rx="1"
-            fill="#FCA5A5" opacity="0.5" />
-          {/* Flag */}
-          <line x1={polys.roofCenter.x} y1={polys.rTopCorner.y}
-            x2={polys.roofCenter.x} y2={polys.rTopCorner.y - 12}
-            stroke="#475569" strokeWidth="0.7" />
-          <polygon
-            points={`${polys.roofCenter.x + 1},${polys.rTopCorner.y - 12} ${polys.roofCenter.x + 7},${polys.rTopCorner.y - 10} ${polys.roofCenter.x + 1},${polys.rTopCorner.y - 8}`}
-            fill="#FBBF24" />
-        </g>
-      );
-    case "food":
-      return (
-        <g>
-          {/* Food tables */}
-          {tableAt(0.3, 0.35, "#FED7AA")}
-          {tableAt(0.6, 0.5, "#FFEDD5")}
-          {tableAt(0.4, 0.7, "#FEE2E2")}
-          {/* Canopy stripes */}
-          <line x1={polys.rTopCorner.x + 6} y1={polys.rTopCorner.y + 2}
-            x2={polys.rBottomCorner.x + 6} y2={polys.rBottomCorner.y + 2}
-            stroke="#FFF" strokeWidth="1.5" opacity="0.25" />
-          <line x1={polys.rTopCorner.x + 16} y1={polys.rTopCorner.y + 2}
-            x2={polys.rBottomCorner.x + 16} y2={polys.rBottomCorner.y + 2}
-            stroke="#FFF" strokeWidth="1.5" opacity="0.25" />
-          {/* Smoke puffs rising above canopy */}
-          <circle cx={polys.roofCenter.x - 6} cy={polys.roofCenter.y - 10}
-            r="2.5" fill="#94A3B8" opacity="0.12" />
-          <circle cx={polys.roofCenter.x - 4} cy={polys.roofCenter.y - 16}
-            r="2" fill="#94A3B8" opacity="0.08" />
-          <circle cx={polys.roofCenter.x - 2} cy={polys.roofCenter.y - 21}
-            r="1.5" fill="#94A3B8" opacity="0.05" />
-        </g>
-      );
-    case "stage":
-      return (
-        <g>
-          {/* Stage platform on ground */}
-          <polygon
-            points={`${polys.topCorner.x + 5},${polys.topCorner.y + 3} ${polys.rightCorner.x - 5},${polys.rightCorner.y + 2} ${polys.bottomCorner.x - 2},${polys.bottomCorner.y - 1} ${polys.leftCorner.x + 5},${polys.leftCorner.y - 1}`}
-            fill="#4A3728" opacity="0.5"
-          />
-          {/* Speaker stacks on ground */}
-          <rect x={polys.leftCorner.x + 10} y={polys.leftCorner.y - 8} width="5" height="6" rx="0.5"
-            fill="#1A1A1A" stroke="#333" strokeWidth="0.3" />
-          <circle cx={polys.leftCorner.x + 12.5} cy={polys.leftCorner.y - 5.5} r="1.5" fill="#2D2D2D" />
-          <rect x={polys.rightCorner.x - 15} y={polys.rightCorner.y - 6} width="5" height="6" rx="0.5"
-            fill="#1A1A1A" stroke="#333" strokeWidth="0.3" />
-          <circle cx={polys.rightCorner.x - 12.5} cy={polys.rightCorner.y - 3.5} r="1.5" fill="#2D2D2D" />
-          {/* Stage lights hanging from canopy */}
-          <circle cx={polys.roofCenter.x - 10} cy={polys.roofCenter.y + 5}
-            r="2" fill="#FBBF24" opacity="0.7" filter="url(#glow)" />
-          <circle cx={polys.roofCenter.x + 3} cy={polys.roofCenter.y + 5}
-            r="2" fill="#EF4444" opacity="0.7" filter="url(#glow)" />
-          <circle cx={polys.roofCenter.x + 16} cy={polys.roofCenter.y + 5}
-            r="2" fill="#3B82F6" opacity="0.7" filter="url(#glow)" />
-        </g>
-      );
-    case "games":
-      return (
-        <g>
-          {/* Cornhole boards on ground */}
-          <polygon
-            points={`${polys.bottomCorner.x - 12},${polys.bottomCorner.y - 8} ${polys.bottomCorner.x - 6},${polys.bottomCorner.y - 10} ${polys.bottomCorner.x - 3},${polys.bottomCorner.y - 7} ${polys.bottomCorner.x - 9},${polys.bottomCorner.y - 5}`}
-            fill="#C4956A" stroke="#8B6914" strokeWidth="0.3"
-          />
-          <circle cx={polys.bottomCorner.x - 8} cy={polys.bottomCorner.y - 7.5} r="1" fill="#1A1A1A" />
-          {/* Pennant flags between canopy poles */}
-          {[0, 1, 2, 3, 4].map((i) => {
-            const t = (i + 0.5) / 5;
-            const fx = polys.rLeftCorner.x + t * (polys.rBottomCorner.x - polys.rLeftCorner.x);
-            const fy = polys.rLeftCorner.y + t * (polys.rBottomCorner.y - polys.rLeftCorner.y) + 3;
-            const colors = ["#EF4444", "#FBBF24", "#3B82F6", "#22C55E", "#A855F7"];
-            return (
-              <polygon key={`pf-${i}`}
-                points={`${fx - 1.5},${fy} ${fx + 1.5},${fy} ${fx},${fy + 3.5}`}
-                fill={colors[i]} opacity="0.8" />
-            );
-          })}
-          {/* Ladder toss frame */}
-          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 10} width="1" height="8" fill="#6B6B6B" />
-          <rect x={polys.roofCenter.x + 12} y={polys.bottomCorner.y - 10} width="1" height="8" fill="#6B6B6B" />
-          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 10} width="8" height="1" fill="#6B6B6B" />
-          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 7} width="8" height="1" fill="#6B6B6B" />
-          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 4} width="8" height="1" fill="#6B6B6B" />
-        </g>
-      );
-    case "petting":
-      return (
-        <g>
-          {/* Wooden fence enclosure on ground */}
-          <polygon
-            points={`${polys.topCorner.x},${polys.topCorner.y + 3} ${polys.rightCorner.x},${polys.rightCorner.y + 2} ${polys.bottomCorner.x},${polys.bottomCorner.y} ${polys.leftCorner.x},${polys.leftCorner.y + 1}`}
-            fill="none" stroke="#A08040" strokeWidth="1.2" strokeDasharray="3 2"
-          />
-          {/* Hay on ground */}
-          <ellipse cx={polys.bottomCorner.x - 5} cy={polys.bottomCorner.y - 3} rx="4" ry="2"
-            fill="#D4A854" opacity="0.4" />
-          <ellipse cx={polys.bottomCorner.x + 8} cy={polys.bottomCorner.y - 5} rx="3" ry="1.5"
-            fill="#C8A048" opacity="0.3" />
-          {/* Small animals */}
-          <ellipse cx={polys.roofCenter.x - 6} cy={polys.bottomCorner.y - 4} rx="3" ry="2"
-            fill="#F0F0F0" />
-          <circle cx={polys.roofCenter.x - 8} cy={polys.bottomCorner.y - 5.5} r="1.5" fill="#E8E8E8" />
-          <ellipse cx={polys.roofCenter.x + 8} cy={polys.bottomCorner.y - 3} rx="2.5" ry="1.8"
-            fill="#C4956A" />
-          <circle cx={polys.roofCenter.x + 6.5} cy={polys.bottomCorner.y - 4.5} r="1.2" fill="#B8856A" />
-          {/* Tiny chick */}
-          <circle cx={polys.roofCenter.x + 2} cy={polys.bottomCorner.y - 1.5} r="1" fill="#FDE047" />
-          <circle cx={polys.roofCenter.x + 2.5} cy={polys.bottomCorner.y - 2.5} r="0.7" fill="#FDE047" />
-        </g>
-      );
-    case "facepainting":
-      return (
-        <g>
-          {/* Tables with paint supplies */}
-          {tableAt(0.4, 0.4, "#E9D5FF")}
-          {tableAt(0.65, 0.6, "#FCE7F3")}
-          {/* Paint splotch decorations on canopy */}
-          <circle cx={polys.roofCenter.x - 6} cy={polys.roofCenter.y + 1} r="2.2" fill="#EF4444" opacity="0.45" />
-          <circle cx={polys.roofCenter.x + 3} cy={polys.roofCenter.y + 3} r="1.8" fill="#3B82F6" opacity="0.45" />
-          <circle cx={polys.roofCenter.x + 8} cy={polys.roofCenter.y} r="1.5" fill="#FBBF24" opacity="0.45" />
-          {/* Canvas on canopy stripe */}
-          <line x1={polys.rTopCorner.x + 5} y1={polys.rTopCorner.y + 2}
-            x2={polys.rBottomCorner.x + 5} y2={polys.rBottomCorner.y + 2}
-            stroke="#FFF" strokeWidth="1.5" opacity="0.2" />
-        </g>
-      );
-    case "sponsors":
-      return (
-        <g>
-          {/* Display tables */}
-          {tableAt(0.35, 0.4, "#FBCFE8")}
-          {tableAt(0.6, 0.55, "#FEF3C7")}
-          {/* Banner stands next to tables */}
-          <rect x={polys.roofCenter.x - 14} y={polys.bottomCorner.y - 12}
-            width="1" height="10" fill="#6B6B6B" />
-          <rect x={polys.roofCenter.x - 18} y={polys.bottomCorner.y - 12}
-            width="9" height="6" rx="0.5" fill="#F472B6" opacity="0.7" stroke="#DB2777" strokeWidth="0.3" />
-          <rect x={polys.roofCenter.x + 8} y={polys.bottomCorner.y - 10}
-            width="1" height="10" fill="#6B6B6B" />
-          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 10}
-            width="9" height="6" rx="0.5" fill="#FDE68A" opacity="0.7" stroke="#D97706" strokeWidth="0.3" />
-          {/* Canopy stripe */}
-          <line x1={polys.rTopCorner.x + 8} y1={polys.rTopCorner.y + 2}
-            x2={polys.rBottomCorner.x + 8} y2={polys.rBottomCorner.y + 2}
-            stroke="#FFF" strokeWidth="1.5" opacity="0.2" />
-        </g>
-      );
-    default:
-      return null;
-  }
+  return (
+    <g>
+      {tableAt(0.45, 0.45, "#BFDBFE")}
+      {tableAt(0.7, 0.6, "#DBEAFE")}
+      <rect x={polys.roofCenter.x - 12} y={polys.roofCenter.y - 6} width="24" height="8" rx="1.5"
+        fill="#F8FAFC" opacity="0.9" />
+      <text x={polys.roofCenter.x} y={polys.roofCenter.y + 0.5} textAnchor="middle"
+        fill="#1D4ED8" fontSize="5" fontFamily="system-ui, sans-serif" fontWeight="800">SHCA</text>
+      <line x1={polys.rTopCorner.x + 8} y1={polys.rTopCorner.y}
+        x2={polys.rTopCorner.x + 8} y2={polys.rTopCorner.y - 16}
+        stroke="#475569" strokeWidth="0.8" />
+      <polygon
+        points={`${polys.rTopCorner.x + 9},${polys.rTopCorner.y - 16} ${polys.rTopCorner.x + 16},${polys.rTopCorner.y - 13.5} ${polys.rTopCorner.x + 9},${polys.rTopCorner.y - 11}`}
+        fill="#2563EB" />
+    </g>
+  );
 }
 
 // ─── Bench along paths ─────────────────────────────────────────
@@ -503,12 +352,96 @@ function IsoTrashBin({ gx, gy }: { gx: number; gy: number }) {
   );
 }
 
-// ─── Main component ─────────────────────────────────────────────
-interface PixelMapProps {
-  onZoneSelect?: (zone: { id: string; label: string; description: string } | null) => void;
+// ─── Game-style stat bar ──────────────────────────────────────────
+function GameStatBar({ x, y, label, icon, current, target, color, accentColor, href }: {
+  x: number; y: number; label: string; icon: string;
+  current: number; target: number; color: string; accentColor: string; href: string;
+}) {
+  const panelW = 128;
+  const panelH = 54;
+  const barW = 90;
+  const barH = 8;
+  const pct = Math.min(100, target > 0 ? (current / target) * 100 : 0);
+
+  return (
+    <g>
+      {/* Panel background */}
+      <rect x={x} y={y} width={panelW} height={panelH} rx="5" fill="#0A0F1E" opacity="0.9" />
+      <rect x={x} y={y} width={panelW} height={panelH} rx="5" fill="none"
+        stroke={color} strokeWidth="0.8" strokeOpacity="0.4" />
+      {/* Top accent bar */}
+      <rect x={x} y={y} width={panelW} height="2" rx="5" fill={color} opacity="0.5" />
+
+      {/* Icon + label row */}
+      <text x={x + 8} y={y + 14} fill="#FFF" fontSize="9" fontFamily="system-ui, sans-serif">
+        {icon}
+      </text>
+      <text x={x + 22} y={y + 14.5} fill={color} fontSize="6.5"
+        fontFamily="system-ui, -apple-system, sans-serif" fontWeight="800" letterSpacing="0.8">
+        {label}
+      </text>
+
+      {/* Count display — big number */}
+      <text x={x + panelW - 8} y={y + 15} textAnchor="end"
+        fill="#FFF" fontSize="9"
+        fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900"
+        style={{ fontVariantNumeric: "tabular-nums" } as React.CSSProperties}>
+        {current}
+        <tspan fill="#64748B" fontSize="5">/{target}</tspan>
+      </text>
+
+      {/* HP-style segmented bar */}
+      <rect x={x + 8} y={y + 20} width={barW} height={barH} rx="4" fill="#1E293B" />
+      {Array.from({ length: 10 }).map((_, i) => {
+        const segX = x + 9 + i * (barW - 2) / 10;
+        const segW = (barW - 2) / 10 - 1;
+        const filled = pct >= (i + 1) * 10;
+        const partial = !filled && pct > i * 10;
+        return (
+          <rect key={i}
+            x={segX} y={y + 21.5}
+            width={segW} height={barH - 3} rx="1.5"
+            fill={filled ? color : partial ? color : "#0F172A"}
+            opacity={filled ? 0.9 : partial ? 0.4 : 0.3}
+          />
+        );
+      })}
+      {/* Bar glow */}
+      <rect x={x + 8} y={y + 20} width={barW * pct / 100} height={barH / 2} rx="3"
+        fill="#FFF" opacity="0.1" />
+
+      {/* Percentage */}
+      <text x={x + 8 + barW + 6} y={y + 27} fill={color} fontSize="5"
+        fontFamily="system-ui, -apple-system, sans-serif" fontWeight="800"
+        style={{ fontVariantNumeric: "tabular-nums" } as React.CSSProperties}>
+        {pct.toFixed(0)}%
+      </text>
+
+      {/* Action button — bigger */}
+      <a href={href} className="cursor-pointer">
+        <rect x={x + 8} y={y + 34} width={panelW - 16} height="14" rx="7"
+          fill={color} opacity="0.9" className="hover:opacity-100 transition-opacity" />
+        <rect x={x + 8} y={y + 34} width={panelW - 16} height="7" rx="7"
+          fill="#FFF" opacity="0.1" />
+        <text x={x + panelW / 2} y={y + 43.5} textAnchor="middle"
+          fill="#052E16" fontSize="5.5"
+          fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900"
+          letterSpacing="0.5" style={{ pointerEvents: "none" }}>
+          {label === "GUESTS" ? "RSVP NOW →" : label === "VOLUNTEERS" ? "SIGN UP →" : "APPLY →"}
+        </text>
+      </a>
+    </g>
+  );
 }
 
-export default function PixelMap({ onZoneSelect }: PixelMapProps) {
+// ─── Main component ─────────────────────────────────────────────
+interface PixelMapProps {
+  onZoneSelect?: (zone: { id: string; label: string; description: string; available?: boolean } | null) => void;
+  stats?: { rsvps: number; volunteers: number; vendors: number };
+  onStatClick?: (type: "rsvp" | "volunteer" | "vendor") => void;
+}
+
+export default function PixelMap({ onZoneSelect, stats, onStatClick }: PixelMapProps) {
   const [movingChars, setMovingChars] = useState<MovingCharacter[]>([]);
   const [hoveredZone, setHoveredZone] = useState<string | null>(null);
   const [selectedZoneId, setSelectedZoneId] = useState<string | null>(null);
@@ -518,7 +451,7 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
   const handleZoneClick = useCallback((zone: IsoZone) => {
     const newId = selectedZoneId === zone.id ? null : zone.id;
     setSelectedZoneId(newId);
-    onZoneSelect?.(newId ? { id: zone.id, label: zone.label, description: zone.description } : null);
+    onZoneSelect?.(newId ? { id: zone.id, label: zone.label, description: zone.description, available: zone.available } : null);
   }, [selectedZoneId, onZoneSelect]);
 
   const loadCharacters = useCallback(async (isInitial: boolean) => {
@@ -561,7 +494,7 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
 
   return (
     <svg
-      viewBox="80 -80 800 520"
+      viewBox="30 -80 900 580"
       className="w-full h-full"
       preserveAspectRatio="xMidYMid meet"
     >
@@ -595,7 +528,17 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
           <stop offset="100%" stopColor="#FFE066" stopOpacity="0" />
         </radialGradient>
 
-        {/* ═══ GRASS TEXTURE GRADIENT ═══ */}
+        {/* ═══ RINK/CONCRETE SURFACE GRADIENTS ═══ */}
+        <linearGradient id="rinkLight" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#D4CDB8" />
+          <stop offset="100%" stopColor="#C8C0A8" />
+        </linearGradient>
+        <linearGradient id="rinkDark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#CCC4AE" />
+          <stop offset="100%" stopColor="#C0B89E" />
+        </linearGradient>
+
+        {/* ═══ GRASS TEXTURE (perimeter areas) ═══ */}
         <linearGradient id="grassLight" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#3D8B2A" />
           <stop offset="100%" stopColor="#2E6B1C" />
@@ -605,14 +548,14 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
           <stop offset="100%" stopColor="#2A6118" />
         </linearGradient>
 
-        {/* ═══ PATH GRADIENTS ═══ */}
+        {/* ═══ PATH GRADIENTS (walkways on concrete) ═══ */}
         <linearGradient id="pathLight" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#D4BA82" />
-          <stop offset="100%" stopColor="#C4A66C" />
+          <stop offset="0%" stopColor="#B8B0A0" />
+          <stop offset="100%" stopColor="#A8A090" />
         </linearGradient>
         <linearGradient id="pathDark" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#C8AE72" />
-          <stop offset="100%" stopColor="#B89858" />
+          <stop offset="0%" stopColor="#B0A898" />
+          <stop offset="100%" stopColor="#A09888" />
         </linearGradient>
 
         {/* ═══ ROOF GRADIENTS (per zone) ═══ */}
@@ -633,6 +576,14 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
           </React.Fragment>
         ))}
 
+        {/* ═══ HILLSIDE GRADIENT (Battalion Park) ═══ */}
+        <linearGradient id="hillGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#8B9B60" />
+          <stop offset="30%" stopColor="#9B8B58" />
+          <stop offset="60%" stopColor="#8A7A48" />
+          <stop offset="100%" stopColor="#6A8A3A" />
+        </linearGradient>
+
         {/* ═══ CLOUD FILTER ═══ */}
         <filter id="cloudSoft" x="-30%" y="-30%" width="160%" height="160%">
           <feGaussianBlur stdDeviation="1.5" />
@@ -640,44 +591,102 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
       </defs>
 
       {/* ═══ SKY ═══ */}
-      <rect x="80" y="-120" width="800" height="700" fill="url(#skyGrad)" />
+      <rect x="30" y="-80" width="900" height="580" fill="url(#skyGrad)" />
 
-      {/* Dark green ground (outside the park) */}
-      <rect x="80" y="130" width="800" height="500" fill="#1A5C10" />
+      {/* ═══ BATTALION PARK HILLSIDE (Signal Hill landmark) ═══ */}
+      {/* Hill slope – brown/green grassy terrain */}
+      <polygon
+        points="30,-20 930,-50 930,130 30,100"
+        fill="url(#hillGrad)"
+      />
+      {/* Hill texture patches */}
+      <ellipse cx="200" cy="20" rx="60" ry="12" fill="#9B8B60" opacity="0.15" />
+      <ellipse cx="450" cy="10" rx="80" ry="15" fill="#8B7B50" opacity="0.12" />
+      <ellipse cx="700" cy="0" rx="55" ry="10" fill="#9B8B60" opacity="0.1" />
+      <ellipse cx="350" cy="50" rx="70" ry="12" fill="#7A8A4A" opacity="0.1" />
+      <ellipse cx="600" cy="60" rx="65" ry="10" fill="#6A7A3A" opacity="0.08" />
 
-      {/* Sun glow (behind clouds) */}
-      <circle cx="780" cy="28" r="50" fill="url(#sunGlow)" />
-      <circle cx="780" cy="28" r="18" fill="#FFF8DC" />
-      <circle cx="776" cy="24" r="5" fill="#FFFEF0" opacity="0.6" />
+      {/* ─── White rock numbers on the hillside ─── */}
+      {/* "113" – upper left */}
+      <text x="180" y="35" fontSize="48" fontFamily="Georgia, serif" fontWeight="900"
+        fill="#E8E0D0" opacity="0.7" letterSpacing="4"
+        transform="rotate(-6, 180, 35)" style={{ paintOrder: "stroke" }}
+        stroke="#D0C8B8" strokeWidth="1.5">113</text>
+      {/* "51" – middle area */}
+      <text x="370" y="45" fontSize="44" fontFamily="Georgia, serif" fontWeight="900"
+        fill="#E8E0D0" opacity="0.65" letterSpacing="3"
+        transform="rotate(-4, 370, 45)" style={{ paintOrder: "stroke" }}
+        stroke="#D0C8B8" strokeWidth="1.2">51</text>
+      {/* "137" – right side */}
+      <text x="520" y="38" fontSize="48" fontFamily="Georgia, serif" fontWeight="900"
+        fill="#E8E0D0" opacity="0.68" letterSpacing="3"
+        transform="rotate(-5, 520, 38)" style={{ paintOrder: "stroke" }}
+        stroke="#D0C8B8" strokeWidth="1.4">137</text>
+      {/* "151" – lower middle */}
+      <text x="380" y="85" fontSize="42" fontFamily="Georgia, serif" fontWeight="900"
+        fill="#E8E0D0" opacity="0.6" letterSpacing="3"
+        transform="rotate(-3, 380, 85)" style={{ paintOrder: "stroke" }}
+        stroke="#D0C8B8" strokeWidth="1.2">151</text>
 
-      {/* Clouds – soft, multi-layered */}
+      {/* ─── Walking path on hillside (like the real one) ─── */}
+      <path d="M 340,-15 Q 350,20 380,50 Q 400,70 380,100"
+        fill="none" stroke="#A09878" strokeWidth="3" opacity="0.3" />
+
+      {/* ─── Trees scattered on hillside ─── */}
       {[
-        { bx: 180, by: 18, s: 1.2, spd: 0.015 },
-        { bx: 350, by: 8, s: 1.0, spd: 0.012 },
-        { bx: 520, by: 22, s: 0.85, spd: 0.02 },
-        { bx: 680, by: 14, s: 0.95, spd: 0.018 },
-        { bx: 130, by: 42, s: 0.65, spd: 0.01 },
-        { bx: 450, by: 46, s: 0.55, spd: 0.008 },
+        { x: 140, y: -10, s: 0.5 }, { x: 250, y: -15, s: 0.6 },
+        { x: 480, y: -20, s: 0.55 }, { x: 650, y: -12, s: 0.5 },
+        { x: 770, y: -8, s: 0.45 }, { x: 320, y: 5, s: 0.4 },
+        { x: 560, y: 0, s: 0.5 }, { x: 820, y: -5, s: 0.4 },
+      ].map((t, i) => (
+        <g key={`ht-${i}`}>
+          <ellipse cx={t.x} cy={t.y} rx={5 * t.s} ry={7 * t.s} fill="#3A6820" opacity="0.6" />
+          <ellipse cx={t.x} cy={t.y - 3 * t.s} rx={4 * t.s} ry={5 * t.s} fill="#4A8030" opacity="0.5" />
+        </g>
+      ))}
+
+      {/* ─── Green ground below hill — flush with hillside, no gap ─── */}
+      <rect x="30" y="85" width="900" height="520" fill="#1A5C10" />
+
+      {/* Sienna Park Dr road at base of hill */}
+      <polygon points="30,95 930,75 930,88 30,108" fill="#606060" opacity="0.35" />
+      <line x1="30" y1="95" x2="930" y2="75" stroke="#7A7060" strokeWidth="1.5" opacity="0.3" />
+      <line x1="30" y1="108" x2="930" y2="88" stroke="#7A7060" strokeWidth="1" opacity="0.2" />
+
+      {/* Sun glow */}
+      <circle cx="880" cy="-75" r="50" fill="url(#sunGlow)" />
+      <circle cx="880" cy="-75" r="16" fill="#FFF8DC" />
+      <circle cx="877" cy="-79" r="4" fill="#FFFEF0" opacity="0.5" />
+
+      {/* Clouds – drifting over the hill */}
+      {[
+        { bx: 200, by: -55, s: 1.1, spd: 0.012 },
+        { bx: 450, by: -65, s: 0.9, spd: 0.015 },
+        { bx: 700, by: -58, s: 0.85, spd: 0.01 },
+        { bx: 150, by: -45, s: 0.6, spd: 0.008 },
       ].map((c, i) => {
         const drift = (frame * c.spd) % 40 - 20;
         return (
-          <g key={`cloud-${i}`} opacity={0.65} filter="url(#cloudSoft)">
-            <ellipse cx={c.bx + drift - 14} cy={c.by + 5} rx={18 * c.s} ry={6 * c.s} fill="#FFF" />
-            <ellipse cx={c.bx + drift} cy={c.by} rx={24 * c.s} ry={8 * c.s} fill="#FFF" />
-            <ellipse cx={c.bx + drift + 16} cy={c.by + 4} rx={16 * c.s} ry={6 * c.s} fill="#FFF" />
-            <ellipse cx={c.bx + drift + 6} cy={c.by - 3} rx={12 * c.s} ry={5 * c.s} fill="#FFF" opacity="0.7" />
+          <g key={`cloud-${i}`} opacity={0.55} filter="url(#cloudSoft)">
+            <ellipse cx={c.bx + drift - 12} cy={c.by + 4} rx={16 * c.s} ry={5 * c.s} fill="#FFF" />
+            <ellipse cx={c.bx + drift} cy={c.by} rx={22 * c.s} ry={7 * c.s} fill="#FFF" />
+            <ellipse cx={c.bx + drift + 14} cy={c.by + 3} rx={14 * c.s} ry={5 * c.s} fill="#FFF" />
           </g>
         );
       })}
 
-      {/* ═══ GROUND TILES (Diamond checkered pattern with gradients) ═══ */}
+      {/* ═══ GROUND TILES (Ice rink concrete surface) ═══ */}
       {Array.from({ length: GRID_ROWS }).map((_, row) =>
         Array.from({ length: GRID_COLS }).map((_, col) => {
           const path = isPathTile(col, row);
-          const fill = path
-            ? ((row + col) % 2 === 0 ? "url(#pathLight)" : "url(#pathDark)")
-            : ((row + col) % 2 === 0 ? "url(#grassLight)" : "url(#grassDark)");
-          const stroke = path ? "#B89858" : "#2A6118";
+          // Rink surface: concrete tan. Paths slightly darker. Outer edges: grass.
+          const isOuterEdge = col === 0 || col === GRID_COLS - 1 || row === 0 || row === GRID_ROWS - 1;
+          const fill = isOuterEdge
+            ? ((row + col) % 2 === 0 ? "url(#grassLight)" : "url(#grassDark)")
+            : path
+              ? ((row + col) % 2 === 0 ? "url(#pathLight)" : "url(#pathDark)")
+              : ((row + col) % 2 === 0 ? "url(#rinkLight)" : "url(#rinkDark)");
+          const stroke = isOuterEdge ? "#2A6118" : path ? "#A09888" : "#BEB8A8";
           return (
             <polygon
               key={`tile-${row}-${col}`}
@@ -685,177 +694,251 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
               fill={fill}
               stroke={stroke}
               strokeWidth="0.3"
-              strokeOpacity="0.5"
+              strokeOpacity="0.4"
             />
           );
         })
       )}
 
-      {/* ═══ Park border fence (diamond perimeter) ═══ */}
+      {/* ═══ Rink boards (concrete/metal border — ice rink style) ═══ */}
       {(() => {
         const tl = gridToScreen(0, 0);
         const tr = gridToScreen(GRID_COLS, 0);
         const br = gridToScreen(GRID_COLS, GRID_ROWS);
         const bl = gridToScreen(0, GRID_ROWS);
-        const pts = `${tl.x},${tl.y} ${tr.x},${tr.y} ${br.x},${br.y} ${bl.x},${bl.y}`;
+        // Inner rink border (1 tile inset)
+        const iTL = gridToScreen(1, 1);
+        const iTR = gridToScreen(GRID_COLS - 1, 1);
+        const iBR = gridToScreen(GRID_COLS - 1, GRID_ROWS - 1);
+        const iBL = gridToScreen(1, GRID_ROWS - 1);
+        const outerPts = `${tl.x},${tl.y} ${tr.x},${tr.y} ${br.x},${br.y} ${bl.x},${bl.y}`;
+        const innerPts = `${iTL.x},${iTL.y} ${iTR.x},${iTR.y} ${iBR.x},${iBR.y} ${iBL.x},${iBL.y}`;
         return (
           <g>
-            {/* Fence shadow */}
-            <polygon
-              points={pts}
-              fill="none"
-              stroke="#000"
-              strokeWidth="3"
-              strokeOpacity="0.08"
-              transform="translate(1,2)"
-            />
-            {/* Fence */}
-            <polygon
-              points={pts}
-              fill="none"
-              stroke="#7C5A2E"
-              strokeWidth="1.8"
-              strokeLinejoin="round"
-            />
-            {/* Fence highlight */}
-            <polygon
-              points={pts}
-              fill="none"
-              stroke="#A08050"
-              strokeWidth="0.6"
-              strokeDasharray="8 4"
-              strokeOpacity="0.5"
-            />
+            {/* Outer board shadow */}
+            <polygon points={outerPts} fill="none"
+              stroke="#000" strokeWidth="4" strokeOpacity="0.1"
+              transform="translate(2,3)" strokeLinejoin="round" />
+            {/* Outer concrete board — the rink wall */}
+            <polygon points={outerPts} fill="none"
+              stroke="#808888" strokeWidth="3.5" strokeLinejoin="round" />
+            {/* Inner board highlight */}
+            <polygon points={innerPts} fill="none"
+              stroke="#A0A8B0" strokeWidth="1.2" strokeLinejoin="round"
+              strokeOpacity="0.5" />
+            {/* Entrance gap at top — break the top edge for the gate */}
+            <line x1={gridToScreen(3, 0).x} y1={gridToScreen(3, 0).y}
+              x2={gridToScreen(7, 0).x} y2={gridToScreen(7, 0).y}
+              stroke="#1A5C10" strokeWidth="5" />
+            {/* Gate posts */}
+            <circle cx={gridToScreen(3, 0).x} cy={gridToScreen(3, 0).y}
+              r="3" fill="#606868" stroke="#808888" strokeWidth="1" />
+            <circle cx={gridToScreen(7, 0).x} cy={gridToScreen(7, 0).y}
+              r="3" fill="#606868" stroke="#808888" strokeWidth="1" />
+            {/* "ENTRANCE" text above gate */}
+            <text
+              x={(gridToScreen(3, 0).x + gridToScreen(7, 0).x) / 2}
+              y={gridToScreen(5, 0).y - 12}
+              textAnchor="middle" fill="#E2E8F0" fontSize="4"
+              fontFamily="system-ui, -apple-system, sans-serif" fontWeight="700"
+              letterSpacing="1.5" opacity="0.7">
+              ENTRANCE
+            </text>
           </g>
         );
       })()}
 
-      {/* ═══ ZONES (open tents, canopies & tables – sorted back-to-front) ═══ */}
+      {/* ═══ Community building (West Hills Shack — top right) ═══ */}
+      {(() => {
+        const bPos = gridToScreen(9, -1.5);
+        const bw = 55;
+        const bh = 40;
+        const roofH = 18;
+        return (
+          <g>
+            {/* Building shadow */}
+            <ellipse cx={bPos.x + 5} cy={bPos.y + 15} rx="30" ry="12" fill="#000" opacity="0.1" />
+            {/* Building left wall */}
+            <polygon
+              points={`${bPos.x - bw / 2},${bPos.y} ${bPos.x},${bPos.y + bh / 3} ${bPos.x},${bPos.y + bh / 3 - roofH} ${bPos.x - bw / 2},${bPos.y - roofH}`}
+              fill="#8B8580" />
+            {/* Building right wall */}
+            <polygon
+              points={`${bPos.x},${bPos.y + bh / 3} ${bPos.x + bw / 2},${bPos.y} ${bPos.x + bw / 2},${bPos.y - roofH} ${bPos.x},${bPos.y + bh / 3 - roofH}`}
+              fill="#7A7570" />
+            {/* Roof */}
+            <polygon
+              points={`${bPos.x - bw / 2},${bPos.y - roofH} ${bPos.x},${bPos.y - roofH - 8} ${bPos.x + bw / 2},${bPos.y - roofH} ${bPos.x},${bPos.y + bh / 3 - roofH}`}
+              fill="#9B9590" />
+            {/* Roof ridge line */}
+            <line x1={bPos.x} y1={bPos.y - roofH - 8}
+              x2={bPos.x} y2={bPos.y + bh / 3 - roofH}
+              stroke="#AAA5A0" strokeWidth="0.8" />
+            {/* Door */}
+            <rect x={bPos.x - 4} y={bPos.y + bh / 3 - 14} width="8" height="10" rx="1" fill="#5A4A3A" />
+            {/* Windows */}
+            <rect x={bPos.x - bw / 2 + 6} y={bPos.y - 10} width="6" height="5" rx="0.5" fill="#87CEEB" opacity="0.6" />
+            <rect x={bPos.x + bw / 2 - 14} y={bPos.y - 10} width="6" height="5" rx="0.5" fill="#87CEEB" opacity="0.6" />
+            {/* "COMMUNITY CENTRE" label */}
+            <text x={bPos.x} y={bPos.y + bh / 3 + 8} textAnchor="middle"
+              fill="#94A3B8" fontSize="3" fontFamily="system-ui, sans-serif" fontWeight="600"
+              letterSpacing="0.8" opacity="0.7">SIGNAL HILL COMMUNITY CENTRE</text>
+          </g>
+        );
+      })()}
+
+      {/* ═══ ZONES (sorted back-to-front) ═══ */}
       {sortedZones.map((zone) => {
         const polys = isoBuildingPolys(zone.gx, zone.gy, zone.gw, zone.gd, zone.h);
         const isHovered = hoveredZone === zone.id;
         const isSelected = selectedZoneId === zone.id;
+        const isAvailable = zone.available === true;
 
-        // Corner positions for tent poles
-        const bl = polys.leftCorner;   // base left
-        const br = polys.bottomCorner; // base bottom
-        const bRight = polys.rightCorner; // base right
-        const bTop = polys.topCorner;  // base top
+        // Corner positions
+        const bl = polys.leftCorner;
+        const br = polys.bottomCorner;
+        const bRight = polys.rightCorner;
+        const bTop = polys.topCorner;
+        const groundPts = `${bTop.x},${bTop.y} ${bRight.x},${bRight.y} ${br.x},${br.y} ${bl.x},${bl.y}`;
 
-        return (
-          <g key={zone.id} filter="url(#buildingShadow)">
-            {/* Ground pad – subtle colored area under the tent */}
-            <polygon
-              points={`${bTop.x},${bTop.y} ${bRight.x},${bRight.y} ${br.x},${br.y} ${bl.x},${bl.y}`}
-              fill={zone.colors.roof}
-              opacity="0.08"
-            />
-
-            {/* Tent poles at corners */}
-            {[
-              { base: bl, roof: polys.rLeftCorner },
-              { base: br, roof: polys.rBottomCorner },
-              { base: bRight, roof: polys.rRightCorner },
-              { base: bTop, roof: polys.rTopCorner },
-            ].map((pole, i) => (
-              <line key={`pole-${zone.id}-${i}`}
-                x1={pole.base.x} y1={pole.base.y}
-                x2={pole.roof.x} y2={pole.roof.y}
-                stroke="#8B7355" strokeWidth="1.2" strokeLinecap="round"
+        if (isAvailable) {
+          // ─── Available vendor spot: dashed outline, muted, with CTA ───
+          return (
+            <g key={zone.id}>
+              {/* Ground pad – very subtle */}
+              <polygon points={groundPts}
+                fill="#94A3B8" opacity={isHovered ? "0.12" : "0.06"}
+                style={{ transition: "opacity 0.2s" }}
               />
-            ))}
 
-            {/* Tent canopy (translucent roof) */}
-            <polygon
-              points={polys.roof}
-              fill={`url(#roof-${zone.id})`}
-              opacity={isHovered ? "0.75" : "0.6"}
-              stroke={isSelected ? "#FFE066" : isHovered ? "#FFF" : zone.colors.roof}
-              strokeWidth={isSelected ? "2" : isHovered ? "1.5" : "0.6"}
-              strokeLinejoin="round"
+              {/* Dashed diamond outline – "empty lot" feel */}
+              <polygon points={groundPts}
+                fill="none"
+                stroke={isHovered ? "#4ADE80" : "#94A3B8"}
+                strokeWidth={isHovered ? "1.5" : "1"}
+                strokeDasharray="6 4"
+                strokeOpacity={isHovered ? "0.7" : "0.4"}
+                strokeLinejoin="round"
+                style={{ transition: "all 0.2s" }}
+              />
+
+              {/* "+" icon in center */}
+              <text
+                x={polys.roofCenter.x}
+                y={polys.roofCenter.y - (isHovered ? 4 : 2)}
+                textAnchor="middle"
+                fill={isHovered ? "#4ADE80" : "#94A3B8"}
+                fontSize={isHovered ? "14" : "12"}
+                fontFamily="system-ui, -apple-system, sans-serif"
+                fontWeight="300"
+                opacity={isHovered ? "0.8" : "0.4"}
+                style={{ pointerEvents: "none", transition: "all 0.2s" }}
+              >
+                +
+              </text>
+
+              {/* Suggestion label */}
+              <text
+                x={polys.roofCenter.x}
+                y={polys.roofCenter.y + (isHovered ? 8 : 6)}
+                textAnchor="middle"
+                fill={isHovered ? "#E2E8F0" : "#94A3B8"}
+                fontSize="3.5"
+                fontFamily="system-ui, -apple-system, sans-serif"
+                fontWeight="500"
+                opacity={isHovered ? "0.9" : "0.45"}
+                style={{ pointerEvents: "none", transition: "all 0.2s" }}
+              >
+                {zone.suggestion || "Available"}
+              </text>
+
+              {/* Hover: "Apply as Vendor" prompt */}
+              {isHovered && (
+                <g>
+                  <rect x={polys.roofCenter.x - 22} y={polys.roofCenter.y + 12}
+                    width="44" height="8" rx="4" fill="#4ADE80" opacity="0.85" />
+                  <text x={polys.roofCenter.x} y={polys.roofCenter.y + 17.5}
+                    textAnchor="middle" fill="#052E16" fontSize="3"
+                    fontFamily="system-ui, -apple-system, sans-serif" fontWeight="700"
+                    style={{ pointerEvents: "none" }}>
+                    APPLY AS VENDOR
+                  </text>
+                </g>
+              )}
+
+              {/* Click target */}
+              <polygon points={groundPts}
+                fill="transparent" className="cursor-pointer"
+                onMouseEnter={() => setHoveredZone(zone.id)}
+                onMouseLeave={() => setHoveredZone(null)}
+                onClick={() => handleZoneClick(zone)}
+              />
+            </g>
+          );
+        }
+
+        // ─── Confirmed zone (SHCA Info): open table with banner ───
+        const cx = (bTop.x + br.x) / 2;
+        const cy = (bTop.y + br.y) / 2;
+        return (
+          <g key={zone.id}>
+            {/* Ground pad */}
+            <polygon points={groundPts}
+              fill={zone.colors.roof} opacity={isHovered ? "0.15" : "0.08"}
               style={{ transition: "opacity 0.2s" }}
             />
-            {/* Canopy highlight stripe */}
+
+            {/* Table (isometric diamond) */}
             <polygon
-              points={polys.roof}
-              fill="#FFF"
-              opacity={isHovered ? "0.15" : "0.08"}
-              style={{ pointerEvents: "none" }}
+              points={`${cx},${cy - 6} ${cx + 18},${cy - 0} ${cx},${cy + 6} ${cx - 18},${cy}`}
+              fill="#DBEAFE" stroke={isHovered ? "#3B82F6" : "rgba(0,0,0,0.12)"} strokeWidth="0.5"
             />
+            {/* Table surface highlight */}
+            <polygon
+              points={`${cx},${cy - 6} ${cx + 18},${cy - 0} ${cx},${cy + 6} ${cx - 18},${cy}`}
+              fill="#FFF" opacity="0.15"
+            />
+            {/* Table legs */}
+            <line x1={cx - 14} y1={cy + 1} x2={cx - 14} y2={cy + 7} stroke="#6B4226" strokeWidth="1" />
+            <line x1={cx + 14} y1={cy + 1} x2={cx + 14} y2={cy + 7} stroke="#6B4226" strokeWidth="1" />
+            <line x1={cx - 5} y1={cy + 5} x2={cx - 5} y2={cy + 11} stroke="#6B4226" strokeWidth="1" />
+            <line x1={cx + 5} y1={cy + 5} x2={cx + 5} y2={cy + 11} stroke="#6B4226" strokeWidth="1" />
+            {/* Table shadow */}
+            <ellipse cx={cx} cy={cy + 12} rx="16" ry="4" fill="#000" opacity="0.06" />
 
-            {/* Scalloped edge – left valance */}
-            {(() => {
-              const edgePoints: string[] = [];
-              const steps = 6;
-              for (let i = 0; i <= steps; i++) {
-                const t = i / steps;
-                const x = polys.rLeftCorner.x + t * (polys.rBottomCorner.x - polys.rLeftCorner.x);
-                const y = polys.rLeftCorner.y + t * (polys.rBottomCorner.y - polys.rLeftCorner.y);
-                const scallop = Math.sin(t * Math.PI * steps) * 2;
-                edgePoints.push(`${x},${y + scallop + 2}`);
-              }
-              const topEdge = `${polys.rBottomCorner.x},${polys.rBottomCorner.y} ${polys.rLeftCorner.x},${polys.rLeftCorner.y}`;
-              return (
-                <polygon
-                  points={`${polys.rLeftCorner.x},${polys.rLeftCorner.y} ${edgePoints.join(" ")} ${polys.rBottomCorner.x},${polys.rBottomCorner.y}`}
-                  fill={zone.colors.leftWall}
-                  opacity="0.4"
-                />
-              );
-            })()}
-
-            {/* Scalloped edge – right valance */}
-            {(() => {
-              const edgePoints: string[] = [];
-              const steps = 6;
-              for (let i = 0; i <= steps; i++) {
-                const t = i / steps;
-                const x = polys.rBottomCorner.x + t * (polys.rRightCorner.x - polys.rBottomCorner.x);
-                const y = polys.rBottomCorner.y + t * (polys.rRightCorner.y - polys.rBottomCorner.y);
-                const scallop = Math.sin(t * Math.PI * steps) * 2;
-                edgePoints.push(`${x},${y + scallop + 2}`);
-              }
-              return (
-                <polygon
-                  points={`${polys.rBottomCorner.x},${polys.rBottomCorner.y} ${edgePoints.join(" ")} ${polys.rRightCorner.x},${polys.rRightCorner.y}`}
-                  fill={zone.colors.rightWall}
-                  opacity="0.35"
-                />
-              );
-            })()}
-
-            {/* Zone-specific ground items (tables, equipment, etc.) */}
-            <BuildingDecor zone={zone} />
-
-            {/* Label on canopy */}
-            <text
-              x={polys.roofCenter.x}
-              y={polys.roofCenter.y + 2}
-              textAnchor="middle"
-              fill="#FFF"
-              fontSize="4.2"
-              fontFamily="system-ui, -apple-system, sans-serif"
-              fontWeight="700"
-              letterSpacing="0.5"
-              stroke="rgba(0,0,0,0.4)" strokeWidth="0.4" paintOrder="stroke"
-              style={{ pointerEvents: "none" }}
-            >
-              {zone.label.toUpperCase()}
+            {/* SHCA banner on table */}
+            <rect x={cx - 14} y={cy - 12} width="28" height="10" rx="2"
+              fill="#F8FAFC" opacity="0.92" stroke="#3B82F6" strokeWidth="0.5" />
+            <text x={cx} y={cy - 4.5} textAnchor="middle"
+              fill="#1D4ED8" fontSize="6" fontFamily="system-ui, sans-serif" fontWeight="800">
+              SHCA
             </text>
 
-            {/* Click targets (generous hit area) */}
+            {/* Small brochures / flyers on table */}
+            <rect x={cx - 8} y={cy - 2} width="4" height="3" rx="0.3"
+              fill="#BFDBFE" transform={`rotate(-10, ${cx - 6}, ${cy})`} />
+            <rect x={cx + 2} y={cy - 1} width="4" height="3" rx="0.3"
+              fill="#93C5FD" transform={`rotate(5, ${cx + 4}, ${cy})`} />
+            <rect x={cx + 8} y={cy - 2} width="3.5" height="2.5" rx="0.3"
+              fill="#DBEAFE" transform={`rotate(-3, ${cx + 10}, ${cy})`} />
+
+            {/* Flag pole */}
+            <line x1={cx + 20} y1={cy - 2} x2={cx + 20} y2={cy - 22}
+              stroke="#475569" strokeWidth="0.8" />
             <polygon
-              points={polys.roof}
-              fill="transparent"
-              className="cursor-pointer"
-              onMouseEnter={() => setHoveredZone(zone.id)}
-              onMouseLeave={() => setHoveredZone(null)}
-              onClick={() => handleZoneClick(zone)}
-            />
-            <polygon
-              points={`${bTop.x},${bTop.y} ${bRight.x},${bRight.y} ${br.x},${br.y} ${bl.x},${bl.y}`}
-              fill="transparent"
-              className="cursor-pointer"
+              points={`${cx + 21},${cy - 22} ${cx + 30},${cy - 19} ${cx + 21},${cy - 16}`}
+              fill="#2563EB" />
+
+            {/* Label */}
+            <text x={cx} y={cy + 18} textAnchor="middle"
+              fill={isHovered ? "#60A5FA" : "#94A3B8"} fontSize="4"
+              fontFamily="system-ui, -apple-system, sans-serif" fontWeight="600"
+              style={{ pointerEvents: "none", transition: "fill 0.2s" }}>
+              SHCA INFO TABLE
+            </text>
+
+            {/* Click target */}
+            <polygon points={groundPts} fill="transparent" className="cursor-pointer"
               onMouseEnter={() => setHoveredZone(zone.id)}
               onMouseLeave={() => setHoveredZone(null)}
               onClick={() => handleZoneClick(zone)}
@@ -864,73 +947,10 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
         );
       })}
 
-      {/* ═══ PROPS ═══ */}
-      {/* Benches along paths */}
-      <IsoBench gx={4} gy={3.3} />
-      <IsoBench gx={6} gy={3.3} />
-      <IsoBench gx={10} gy={3.3} />
-      <IsoBench gx={13} gy={3.3} />
-
-      {/* Lamp posts */}
-      <IsoLamp gx={1} gy={3} />
-      <IsoLamp gx={8} gy={6} />
-      <IsoLamp gx={14} gy={3} />
-      <IsoLamp gx={5} gy={6.5} />
-
-      {/* Trash bins */}
-      <IsoTrashBin gx={3} gy={3.5} />
-      <IsoTrashBin gx={9} gy={3.5} />
-      <IsoTrashBin gx={7} gy={6} />
-
-      {/* ═══ ENTRANCE GATE ═══ */}
-      {(() => {
-        const gatePolys = isoBuildingPolys(7, 8, 2.5, 0.5, 20);
-        return (
-          <g>
-            {/* Gate pillars */}
-            {(() => {
-              const lp = isoBuildingPolys(7, 8, 0.3, 0.3, 24);
-              const rp = isoBuildingPolys(9.2, 8, 0.3, 0.3, 24);
-              return (
-                <>
-                  <polygon points={lp.leftWall} fill="#5C5C5C" />
-                  <polygon points={lp.rightWall} fill="#4A4A4A" />
-                  <polygon points={lp.roof} fill="#707070" />
-                  <polygon points={rp.leftWall} fill="#5C5C5C" />
-                  <polygon points={rp.rightWall} fill="#4A4A4A" />
-                  <polygon points={rp.roof} fill="#707070" />
-                </>
-              );
-            })()}
-            {/* Gate arch */}
-            <polygon points={gatePolys.leftWall} fill="#4A4A4A" stroke="#333" strokeWidth="0.5" />
-            <polygon points={gatePolys.rightWall} fill="#3A3A3A" stroke="#333" strokeWidth="0.5" />
-            <polygon points={gatePolys.roof} fill="#5C5C5C" stroke="#333" strokeWidth="0.5" />
-            {/* Entrance text */}
-            <text
-              x={gatePolys.roofCenter.x}
-              y={gatePolys.roofCenter.y + 2}
-              textAnchor="middle"
-              fill="#4ADE80"
-              fontSize="3.8"
-              fontFamily="system-ui, -apple-system, sans-serif"
-              fontWeight="700"
-              letterSpacing="1.5"
-            >
-              ENTRANCE
-            </text>
-            {/* Gate lanterns */}
-            <circle cx={gatePolys.roofCenter.x - 15} cy={gatePolys.roofCenter.y - 5}
-              r="2.5" fill="#FBBF24" opacity="0.5" />
-            <circle cx={gatePolys.roofCenter.x - 15} cy={gatePolys.roofCenter.y - 5}
-              r="5" fill="#FBBF24" opacity="0.08" />
-            <circle cx={gatePolys.roofCenter.x + 15} cy={gatePolys.roofCenter.y - 5}
-              r="2.5" fill="#FBBF24" opacity="0.5" />
-            <circle cx={gatePolys.roofCenter.x + 15} cy={gatePolys.roofCenter.y - 5}
-              r="5" fill="#FBBF24" opacity="0.08" />
-          </g>
-        );
-      })()}
+      {/* ═══ PROPS (minimal — rink surface is mostly open) ═══ */}
+      {/* A few trash bins near the entrance */}
+      <IsoTrashBin gx={6} gy={0.5} />
+      <IsoTrashBin gx={10} gy={0.5} />
 
       {/* ═══ TREES ═══ */}
       {TREE_POSITIONS.map((t, i) => (
@@ -973,31 +993,145 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
         );
       })()}
 
-      {/* ═══ TITLE BANNER ═══ */}
-      {(() => {
-        const bannerPos = gridToScreen(GRID_COLS / 2, GRID_ROWS + 0.5);
+      {/* ═══ GAME-STYLE STAT BARS (right side) ═══ */}
+      {stats && (() => {
+        const TARGETS_DISPLAY = { rsvps: 200, volunteers: 30, vendors: 10 };
+        const baseX = 795;
+        const baseY = 195;
+        const gap = 60;
         return (
           <g>
-            {/* Banner shadow */}
-            <rect x={bannerPos.x - 128} y={bannerPos.y + 1}
-              width="256" height="28" rx="8" fill="#000" opacity="0.2" />
-            {/* Banner background */}
-            <rect x={bannerPos.x - 130} y={bannerPos.y - 2}
-              width="260" height="30" rx="8" fill="#0A0F1E" opacity="0.88" />
-            {/* Banner border glow */}
-            <rect x={bannerPos.x - 130} y={bannerPos.y - 2}
-              width="260" height="30" rx="8" fill="none"
-              stroke="#4ADE80" strokeWidth="0.5" strokeOpacity="0.3" />
-            <text x={bannerPos.x} y={bannerPos.y + 12}
-              textAnchor="middle" fill="#4ADE80" fontSize="7"
-              fontFamily="system-ui, -apple-system, sans-serif" fontWeight="800" letterSpacing="1.5">
-              SIGNAL HILL NEIGHBOUR DAY
-            </text>
-            <text x={bannerPos.x} y={bannerPos.y + 22}
-              textAnchor="middle" fill="#FFE066" fontSize="5"
-              fontFamily="system-ui, -apple-system, sans-serif" fontWeight="600" letterSpacing="2">
-              JUNE 21, 2026
-            </text>
+            <GameStatBar
+              x={baseX} y={baseY}
+              label="GUESTS" icon="🎈"
+              current={stats.rsvps} target={TARGETS_DISPLAY.rsvps}
+              color="#4ADE80" accentColor="#22C55E"
+              href="/rsvp"
+            />
+            <GameStatBar
+              x={baseX} y={baseY + gap}
+              label="VOLUNTEERS" icon="🙋"
+              current={stats.volunteers} target={TARGETS_DISPLAY.volunteers}
+              color="#60A5FA" accentColor="#3B82F6"
+              href="/volunteer"
+            />
+            <GameStatBar
+              x={baseX} y={baseY + gap * 2}
+              label="VENDORS" icon="🏪"
+              current={stats.vendors} target={TARGETS_DISPLAY.vendors}
+              color="#F472B6" accentColor="#EC4899"
+              href="/vendor"
+            />
+          </g>
+        );
+      })()}
+
+      {/* ═══ CHANGEABLE-LETTER SIGN BOARD (roadside marquee style) ═══ */}
+      {(() => {
+        // Position on top of the hill, above the rock numbers
+        const sx = 620;
+        const sy = -72;
+        const boardW = 180;
+        const boardH = 110;
+        const line1 = "SIGNAL HILL";
+        const line2 = "NEIGHBOUR";
+        const line3 = "DAY";
+        const line4 = "JUNE 20 2026";
+        const line5 = "11AM - 4PM";
+        const letterW = 10;
+        const letterH = 11;
+        const lineGap = 1.5;
+
+        const renderLetterRow = (text: string, rowY: number, color: string) => {
+          const chars = text.split("");
+          const totalW = chars.length * letterW;
+          const startX = sx + (boardW - totalW) / 2;
+          return chars.map((ch, i) => {
+            if (ch === " ") return null;
+            return (
+              <g key={`letter-${rowY}-${i}`}>
+                {/* Letter tile background */}
+                <rect
+                  x={startX + i * letterW + 0.3}
+                  y={rowY + 0.3}
+                  width={letterW - 0.6}
+                  height={letterH - 0.6}
+                  rx="0.5"
+                  fill="#1A1A1A"
+                  opacity="0.5"
+                />
+                {/* The letter itself */}
+                <text
+                  x={startX + i * letterW + letterW / 2}
+                  y={rowY + letterH - 2.5}
+                  textAnchor="middle"
+                  fill={color}
+                  fontSize="9"
+                  fontFamily="'Courier New', Courier, monospace"
+                  fontWeight="700"
+                  letterSpacing="0"
+                >
+                  {ch}
+                </text>
+              </g>
+            );
+          });
+        };
+
+        const row1Y = sy + 8;
+        const row2Y = row1Y + letterH + lineGap;
+        const row3Y = row2Y + letterH + lineGap;
+        const row4Y = row3Y + letterH + lineGap + 3;
+        const row5Y = row4Y + letterH + lineGap;
+
+        return (
+          <g>
+            {/* Post legs */}
+            <rect x={sx + 20} y={sy + boardH - 2} width="4" height="40" fill="#5A4020" />
+            <rect x={sx + boardW - 24} y={sy + boardH - 2} width="4" height="40" fill="#5A4020" />
+            {/* Post leg shadows */}
+            <rect x={sx + 21.5} y={sy + boardH - 2} width="1.5" height="40" fill="#4A3018" opacity="0.4" />
+            <rect x={sx + boardW - 22.5} y={sy + boardH - 2} width="1.5" height="40" fill="#4A3018" opacity="0.4" />
+            {/* Ground shadow */}
+            <ellipse cx={sx + boardW / 2} cy={sy + boardH + 38} rx="40" ry="5" fill="#000" opacity="0.1" />
+
+            {/* Main board backing — felt-board black background */}
+            <rect x={sx} y={sy} width={boardW} height={boardH} rx="3" fill="#0D0D0D" />
+            {/* Inner border — classic marquee frame */}
+            <rect x={sx + 3} y={sy + 3} width={boardW - 6} height={boardH - 6}
+              rx="3" fill="none" stroke="#C0A060" strokeWidth="2" />
+            {/* Outer frame */}
+            <rect x={sx} y={sy} width={boardW} height={boardH}
+              rx="3" fill="none" stroke="#8B7040" strokeWidth="2" />
+            {/* Frame corner accents */}
+            <circle cx={sx + 6} cy={sy + 6} r="2.5" fill="#D4B068" />
+            <circle cx={sx + boardW - 6} cy={sy + 6} r="2.5" fill="#D4B068" />
+            <circle cx={sx + 6} cy={sy + boardH - 6} r="2.5" fill="#D4B068" />
+            <circle cx={sx + boardW - 6} cy={sy + boardH - 6} r="2.5" fill="#D4B068" />
+
+            {/* Groove lines for letter rails (horizontal tracks) */}
+            {[row1Y, row2Y, row3Y, row4Y, row5Y].map((ry, i) => (
+              <line key={`rail-${i}`}
+                x1={sx + 5} y1={ry + letterH + 0.5}
+                x2={sx + boardW - 5} y2={ry + letterH + 0.5}
+                stroke="#333" strokeWidth="0.4" />
+            ))}
+
+            {/* Letter rows */}
+            {renderLetterRow(line1, row1Y, "#FFFFFF")}
+            {renderLetterRow(line2, row2Y, "#FFFFFF")}
+            {renderLetterRow(line3, row3Y, "#FFFFFF")}
+            {renderLetterRow(line4, row4Y, "#FFE066")}
+            {renderLetterRow(line5, row5Y, "#FFE066")}
+
+            {/* Divider line between title and date */}
+            <line x1={sx + 15} y1={row4Y - 2} x2={sx + boardW - 15} y2={row4Y - 2}
+              stroke="#C0A060" strokeWidth="0.5" opacity="0.5" />
+
+            {/* Top header accent — "COMMUNITY EVENT" small text */}
+            <text x={sx + boardW / 2} y={sy + 9} textAnchor="middle"
+              fill="#C0A060" fontSize="4" fontFamily="system-ui, sans-serif" fontWeight="600"
+              letterSpacing="3">COMMUNITY EVENT</text>
           </g>
         );
       })()}

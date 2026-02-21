@@ -29,8 +29,8 @@ export interface MovingCharacter {
   thoughtTimer: number;
 }
 
-// Entrance gate location
-const ENTRANCE = { x: 280, y: 310 };
+// Entrance gate location (top of the rink, near the building)
+const ENTRANCE = { x: 280, y: 80 };
 
 /** Pick a random walkable position biased by character type */
 function randomTarget(type: PixelCharacterData["type"]): {

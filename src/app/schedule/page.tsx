@@ -45,7 +45,7 @@ export default function SchedulePage() {
       <div className="text-center">
         <h1 className="text-sm text-[#FBBF24]">📅 Event Day</h1>
         <p className="text-[8px] text-[#94A3B8] mt-2">
-          June 21, 2026 &bull; 489 Sienna Park Dr SW
+          June 20, 2026 &bull; 489 Sienna Park Dr SW
         </p>
       </div>
 
