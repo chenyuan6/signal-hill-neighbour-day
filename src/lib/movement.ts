@@ -89,7 +89,7 @@ export function initMovingCharacter(
     color: char.color,
     type: char.type,
     name: char.name,
-    speed: 1.0 + Math.random() * 0.8,
+    speed: 0.4 + Math.random() * 0.35,
     state: "walking",
     facing: target.x > char.x ? "right" : "left",
     idleTimer: 0,
@@ -114,7 +114,7 @@ export function spawnAtEntrance(
     color: char.color,
     type: char.type,
     name: char.name,
-    speed: 1.2 + Math.random() * 0.5,
+    speed: 0.45 + Math.random() * 0.3,
     state: "walking",
     facing: target.x > ENTRANCE.x ? "right" : "left",
     idleTimer: 0,
@@ -163,7 +163,7 @@ export function tickCharacters(chars: MovingCharacter[]): MovingCharacter[] {
 
     if (dist < 2) {
       next.state = "idle";
-      next.idleTimer = Math.floor(20 + Math.random() * 40);
+      next.idleTimer = Math.floor(60 + Math.random() * 90);
       next.x = next.targetX;
       next.y = next.targetY;
       return next;

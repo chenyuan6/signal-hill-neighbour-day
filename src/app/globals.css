@@ -22,14 +22,12 @@
   --foreground: #F0FDF4;
 }
 
-* {
-  image-rendering: pixelated;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Press Start 2P", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* pixel border utility */
@@ -76,52 +74,25 @@ body {
 
 /* bounce animation for characters */
 @keyframes pixel-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 @keyframes pixel-wave {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(10deg);
-  }
-  75% {
-    transform: rotate(-10deg);
-  }
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
 }
 
 @keyframes float-balloon {
-  0%,
-  100% {
-    transform: translateY(0) translateX(0);
-  }
-  33% {
-    transform: translateY(-3px) translateX(2px);
-  }
-  66% {
-    transform: translateY(-1px) translateX(-2px);
-  }
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33% { transform: translateY(-3px) translateX(2px); }
+  66% { transform: translateY(-1px) translateX(-2px); }
 }
 
-.animate-pixel-bounce {
-  animation: pixel-bounce 0.8s ease-in-out infinite;
-}
-
-.animate-pixel-wave {
-  animation: pixel-wave 1.2s ease-in-out infinite;
-}
-
-.animate-float-balloon {
-  animation: float-balloon 2s ease-in-out infinite;
-}
+.animate-pixel-bounce { animation: pixel-bounce 0.8s ease-in-out infinite; }
+.animate-pixel-wave { animation: pixel-wave 1.2s ease-in-out infinite; }
+.animate-float-balloon { animation: float-balloon 2s ease-in-out infinite; }
 
 /* Pixel input */
 .pixel-input {
@@ -140,9 +111,7 @@ body {
   box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.3);
 }
 
-.pixel-input::placeholder {
-  color: #64748B;
-}
+.pixel-input::placeholder { color: #64748B; }
 
 .pixel-select {
   background: #1E293B;
@@ -160,9 +129,7 @@ body {
   background-size: 16px;
 }
 
-.pixel-select:focus {
-  border-color: #4ADE80;
-}
+.pixel-select:focus { border-color: #4ADE80; }
 
 /* Progress bar */
 .pixel-progress {
@@ -192,41 +159,67 @@ body {
   white-space: nowrap;
 }
 
-/* RCT-style HUD elements */
-.rct-stat {
-  display: flex;
-  align-items: baseline;
-  gap: 1px;
-  font-family: "Press Start 2P", monospace;
-  font-size: 9px;
-  padding: 2px 6px;
-  background: #1A1A1A;
-  border: 1px solid #4A4A4A;
+/* ═══ Modern HUD (glassmorphism) ═══ */
+.hud-bar {
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  background: rgba(10, 15, 26, 0.72);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
-.rct-nav-btn {
+.hud-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.hud-stat-label {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.55;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.hud-nav-btn {
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
-  font-family: "Press Start 2P", monospace;
-  font-size: 7px;
-  font-weight: bold;
+  padding: 5px 14px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-shadow:
-    inset -1px -1px 0px 0px rgba(0, 0, 0, 0.2),
-    inset 1px 1px 0px 0px rgba(255, 255, 255, 0.2);
-  transition: transform 0.1s;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.rct-nav-btn:hover {
+.hud-nav-btn:hover {
   transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   filter: brightness(1.1);
 }
 
-.rct-nav-btn:active {
-  transform: translateY(1px);
-  box-shadow:
-    inset 1px 1px 0px 0px rgba(0, 0, 0, 0.2),
-    inset -1px -1px 0px 0px rgba(255, 255, 255, 0.2);
+.hud-nav-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Zone info card */
+.zone-card {
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  background: rgba(10, 15, 30, 0.82);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(74, 222, 128, 0.1);
 }

@@ -6,6 +6,26 @@ import { getRSVPs, getVolunteers, getVendors } from "@/lib/store";
 import { TARGETS } from "@/lib/types";
 import Link from "next/link";
 
+function StatPill({ value, target, label, color }: {
+  value: number; target: number; label: string; color: string;
+}) {
+  const pct = Math.min(100, (value / target) * 100);
+  return (
+    <div className="hud-stat">
+      <span style={{ color, fontVariantNumeric: "tabular-nums" }}>{value}</span>
+      <div className="flex flex-col gap-0.5">
+        <span className="hud-stat-label">{label}</span>
+        <div className="w-14 h-1 rounded-full bg-white/10 overflow-hidden">
+          <div
+            className="h-full rounded-full transition-all duration-700"
+            style={{ width: `${pct}%`, background: color }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [stats, setStats] = useState({ rsvps: 0, volunteers: 0, vendors: 0 });
   const [selectedZone, setSelectedZone] = useState<{
@@ -22,120 +42,107 @@ export default function Home() {
       });
     }
     load();
-    // Poll stats every 10 seconds
     const interval = setInterval(load, 10000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-[#1A472A]">
-      {/* ═══ TOP TOOLBAR (RCT-style) ═══ */}
-      <div className="h-10 bg-[#2A2A2A] border-b-2 border-[#4A4A4A] flex items-center px-2 gap-1 shrink-0 z-20">
-        {/* Title */}
-        <div className="flex items-center gap-2 mr-3">
-          <div className="w-5 h-5 bg-[#4ADE80] rounded-sm flex items-center justify-center text-[6px] font-bold text-[#0F172A]">
-            SH
+      {/* ═══ TOP TOOLBAR (glassmorphism) ═══ */}
+      <div className="hud-bar h-12 border-b flex items-center px-3 gap-2 shrink-0 z-20">
+        {/* Logo + Title */}
+        <div className="flex items-center gap-2.5 mr-2">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#4ADE80] to-[#22C55E] flex items-center justify-center shadow-md">
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 800, color: "#052E16" }}>SH</span>
           </div>
-          <span className="text-[#4ADE80] text-[9px] font-mono font-bold hidden sm:block">
-            SIGNAL HILL NEIGHBOUR DAY
-          </span>
-          <span className="text-[#4ADE80] text-[9px] font-mono font-bold sm:hidden">
-            SHND
-          </span>
+          <div className="hidden sm:block">
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 700, color: "#F0FDF4", letterSpacing: "-0.02em" }}>
+              Signal Hill Neighbour Day
+            </div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#94A3B8", fontWeight: 400 }}>
+              June 21, 2026
+            </div>
+          </div>
         </div>
 
         {/* Separator */}
-        <div className="w-px h-6 bg-[#4A4A4A] mx-1" />
+        <div className="w-px h-7 bg-white/10 mx-1" />
 
         {/* Stats */}
         <div className="flex items-center gap-2">
-          <div className="rct-stat">
-            <span className="text-[#4ADE80]">{stats.rsvps}</span>
-            <span className="text-[#888] text-[7px]">/{TARGETS.rsvps}</span>
-            <span className="text-[#94A3B8] text-[6px] ml-0.5 hidden sm:inline">GUESTS</span>
-          </div>
-          <div className="rct-stat">
-            <span className="text-[#60A5FA]">{stats.volunteers}</span>
-            <span className="text-[#888] text-[7px]">/{TARGETS.volunteers}</span>
-            <span className="text-[#94A3B8] text-[6px] ml-0.5 hidden sm:inline">VOLS</span>
-          </div>
-          <div className="rct-stat">
-            <span className="text-[#F472B6]">{stats.vendors}</span>
-            <span className="text-[#888] text-[7px]">/{TARGETS.vendors}</span>
-            <span className="text-[#94A3B8] text-[6px] ml-0.5 hidden sm:inline">VENDORS</span>
-          </div>
+          <StatPill value={stats.rsvps} target={TARGETS.rsvps} label="Guests" color="#4ADE80" />
+          <StatPill value={stats.volunteers} target={TARGETS.volunteers} label="Volunteers" color="#60A5FA" />
+          <StatPill value={stats.vendors} target={TARGETS.vendors} label="Vendors" color="#F472B6" />
         </div>
 
-        {/* Separator */}
-        <div className="w-px h-6 bg-[#4A4A4A] mx-1" />
-
         {/* Nav buttons */}
-        <div className="flex items-center gap-1 ml-auto">
-          <Link href="/rsvp" className="rct-nav-btn bg-[#4ADE80] text-[#0F172A]">
+        <div className="flex items-center gap-1.5 ml-auto">
+          <Link href="/rsvp" className="hud-nav-btn bg-[#4ADE80] text-[#052E16]">
             RSVP
           </Link>
-          <Link href="/volunteer" className="rct-nav-btn bg-[#60A5FA] text-[#0F172A]">
-            VOLUNTEER
+          <Link href="/volunteer" className="hud-nav-btn bg-[#60A5FA] text-[#0C2D57]">
+            Volunteer
           </Link>
-          <Link href="/vendor" className="rct-nav-btn bg-[#F472B6] text-[#0F172A]">
-            VENDOR
+          <Link href="/vendor" className="hud-nav-btn bg-[#F472B6] text-[#4A0E2B]">
+            Vendor
           </Link>
-          <Link href="/dashboard" className="rct-nav-btn bg-[#FFE066] text-[#0F172A]">
-            STATS
+          <Link href="/dashboard" className="hud-nav-btn bg-white/10 text-[#F0FDF4] hidden sm:inline-flex">
+            Stats
           </Link>
-          <Link href="/schedule" className="rct-nav-btn bg-[#94A3B8] text-[#0F172A]">
-            SCHEDULE
+          <Link href="/schedule" className="hud-nav-btn bg-white/10 text-[#F0FDF4] hidden sm:inline-flex">
+            Schedule
           </Link>
         </div>
       </div>
 
-      {/* ═══ MAP AREA (fills remaining space) ═══ */}
+      {/* ═══ MAP AREA ═══ */}
       <div
         className="flex-1 overflow-hidden relative"
         style={{
-          background: "linear-gradient(180deg, #7EC8E3 0%, #B5E3F5 28%, #D4F0D4 40%, #1A5C10 40%, #163F0E 100%)",
+          background: "linear-gradient(180deg, #87CEEB 0%, #B0E0F0 35%, #C8ECD0 55%, #1A5C10 55%, #163F0E 100%)",
         }}
       >
         <PixelMap onZoneSelect={setSelectedZone} />
 
-        {/* Zone info popup */}
+        {/* Zone info card */}
         {selectedZone && (
-          <div className="absolute top-3 right-3 w-56 bg-[#0F172A] border-2 border-[#4ADE80] p-3 z-30">
-            <div className="flex items-start justify-between">
+          <div className="zone-card absolute top-4 right-4 w-64 p-4 z-30">
+            <div className="flex items-start justify-between gap-2">
               <div>
-                <h3 className="text-[10px] text-[#4ADE80] font-mono font-bold">
+                <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#4ADE80" }}>
                   {selectedZone.label}
                 </h3>
-                <p className="text-[8px] text-[#94A3B8] mt-1 font-mono">
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#94A3B8", marginTop: 4, lineHeight: 1.5 }}>
                   {selectedZone.description}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedZone(null)}
-                className="text-[8px] text-[#94A3B8] hover:text-[#F0FDF4] font-mono ml-2"
+                className="w-6 h-6 rounded-md bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/60 hover:text-white/90 transition-colors"
+                style={{ fontFamily: "Inter, sans-serif", fontSize: 12 }}
               >
-                [X]
+                ✕
               </button>
             </div>
           </div>
         )}
       </div>
 
-      {/* ═══ BOTTOM INFO BAR ═══ */}
-      <div className="h-8 bg-[#2A2A2A] border-t-2 border-[#4A4A4A] flex items-center px-3 gap-3 shrink-0 z-20">
-        <span className="text-[#FFE066] text-[7px] font-mono">
-          JUNE 21, 2026
+      {/* ═══ BOTTOM BAR ═══ */}
+      <div className="hud-bar h-9 border-t flex items-center px-4 gap-4 shrink-0 z-20">
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: "#FFE066" }}>
+          June 21, 2026
         </span>
-        <div className="w-px h-4 bg-[#4A4A4A]" />
-        <span className="text-[#94A3B8] text-[7px] font-mono">
+        <div className="w-px h-4 bg-white/10" />
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "#94A3B8" }}>
           489 Sienna Park Dr SW
         </span>
-        <div className="w-px h-4 bg-[#4A4A4A]" />
-        <span className="text-[#94A3B8] text-[7px] font-mono">
-          11AM - 4PM
+        <div className="w-px h-4 bg-white/10" />
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "#94A3B8" }}>
+          11 AM – 4 PM
         </span>
         <div className="flex-1" />
-        <span className="text-[#4ADE80] text-[7px] font-mono">
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 500, color: "#4ADE80" }}>
           Signal Hill Community Association
         </span>
       </div>

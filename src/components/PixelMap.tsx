@@ -34,50 +34,50 @@ interface IsoZone {
 const ISO_ZONES: IsoZone[] = [
   {
     id: "bouncy", label: "Bouncy Castles",
-    gx: 0.5, gy: 0.5, gw: 3, gd: 2, h: 34,
+    gx: 0.5, gy: 0.5, gw: 3, gd: 2, h: 28,
     colors: { roof: "#EF4444", leftWall: "#DC2626", rightWall: "#B91C1C" },
     description: "Inflatable fun for kids of all ages!",
   },
   {
     id: "facepainting", label: "Face Painting",
-    gx: 4, gy: 0.5, gw: 2.5, gd: 2, h: 20,
-    colors: { roof: "#A855F7", leftWall: "#9333EA", rightWall: "#7C3AED" },
+    gx: 4, gy: 0.5, gw: 2.5, gd: 2, h: 16,
+    colors: { roof: "#C084FC", leftWall: "#A855F7", rightWall: "#9333EA" },
     description: "Get your face painted by local artists",
   },
   {
     id: "games", label: "Yard Games",
-    gx: 7, gy: 0.5, gw: 3, gd: 2, h: 22,
-    colors: { roof: "#22C55E", leftWall: "#16A34A", rightWall: "#15803D" },
+    gx: 7, gy: 0.5, gw: 3, gd: 2, h: 14,
+    colors: { roof: "#4ADE80", leftWall: "#22C55E", rightWall: "#16A34A" },
     description: "Cornhole, ladder toss, and more",
   },
   {
     id: "info", label: "SHCA Info",
-    gx: 11, gy: 0.5, gw: 3.5, gd: 2.5, h: 52,
-    colors: { roof: "#3B82F6", leftWall: "#2563EB", rightWall: "#1D4ED8" },
+    gx: 11, gy: 0.5, gw: 3.5, gd: 2.5, h: 20,
+    colors: { roof: "#60A5FA", leftWall: "#3B82F6", rightWall: "#2563EB" },
     description: "Community info & membership signup",
   },
   {
     id: "petting", label: "Petting Zoo",
-    gx: 0.5, gy: 4, gw: 3, gd: 2, h: 14,
-    colors: { roof: "#EAB308", leftWall: "#CA8A04", rightWall: "#A16207" },
+    gx: 0.5, gy: 4, gw: 3, gd: 2, h: 10,
+    colors: { roof: "#FDE047", leftWall: "#FACC15", rightWall: "#EAB308" },
     description: "Meet friendly farm animals",
   },
   {
     id: "food", label: "Food Vendors",
-    gx: 4, gy: 3.5, gw: 3, gd: 2.5, h: 26,
-    colors: { roof: "#F97316", leftWall: "#EA580C", rightWall: "#C2410C" },
+    gx: 4, gy: 3.5, gw: 3, gd: 2.5, h: 18,
+    colors: { roof: "#FB923C", leftWall: "#F97316", rightWall: "#EA580C" },
     description: "Local food trucks and BBQ",
   },
   {
     id: "stage", label: "Music Stage",
-    gx: 7.5, gy: 4, gw: 3, gd: 2.5, h: 30,
-    colors: { roof: "#0EA5E9", leftWall: "#0284C7", rightWall: "#0369A1" },
+    gx: 7.5, gy: 4, gw: 3, gd: 2.5, h: 24,
+    colors: { roof: "#38BDF8", leftWall: "#0EA5E9", rightWall: "#0284C7" },
     description: "Live music all day long",
   },
   {
     id: "sponsors", label: "Sponsors",
-    gx: 11, gy: 4, gw: 3, gd: 2, h: 22,
-    colors: { roof: "#EC4899", leftWall: "#DB2777", rightWall: "#BE185D" },
+    gx: 11, gy: 4, gw: 3, gd: 2, h: 16,
+    colors: { roof: "#F472B6", leftWall: "#EC4899", rightWall: "#DB2777" },
     description: "Meet our amazing community sponsors",
   },
 ];
@@ -123,7 +123,7 @@ const TREE_POSITIONS: { gx: number; gy: number; size: number }[] = [
   { gx: -0.5, gy: 7, size: 1.1 },
 ];
 
-// ─── Tiny isometric guest (RCT-style ~8px tall) ────────────────
+// ─── Tiny isometric guest (smooth, rounded ~8px tall) ──────────
 function TinyGuest({ x, y, color, type, walkFrame, frameCounter, facing, name }: {
   x: number; y: number; color: string; type: string;
   walkFrame: number; frameCounter: number; facing: string; name: string;
@@ -141,275 +141,307 @@ function TinyGuest({ x, y, color, type, walkFrame, frameCounter, facing, name }:
     <g transform={`translate(${x}, ${y})`}>
       <title>{name} ({type})</title>
       {/* Shadow */}
-      <ellipse cx="0" cy="3" rx="2.5" ry="1" fill="#000" opacity="0.2" />
+      <ellipse cx="0" cy="3" rx="3" ry="1.2" fill="#000" opacity="0.15" />
       {/* Legs */}
-      <rect x={-1.2 + legOff * flip} y={bob + 0.5} width="1" height="2.5" fill="#1E293B" />
-      <rect x={0.2 - legOff * flip} y={bob + 0.5} width="1" height="2.5" fill="#1E293B" />
+      <rect x={-1.2 + legOff * flip} y={bob + 0.5} width="1" height="2.5" rx="0.4" fill="#2D3748" />
+      <rect x={0.2 - legOff * flip} y={bob + 0.5} width="1" height="2.5" rx="0.4" fill="#2D3748" />
       {/* Shoes */}
-      <rect x={-1.5 + legOff * flip} y={bob + 2.5} width="1.5" height="0.8" fill="#4A2500" />
-      <rect x={0 - legOff * flip} y={bob + 2.5} width="1.5" height="0.8" fill="#4A2500" />
+      <rect x={-1.5 + legOff * flip} y={bob + 2.5} width="1.5" height="0.8" rx="0.3" fill="#5A3A1A" />
+      <rect x={0 - legOff * flip} y={bob + 2.5} width="1.5" height="0.8" rx="0.3" fill="#5A3A1A" />
       {/* Body */}
-      <rect x="-1.5" y={bob - 3} width="3" height="3.5" fill={color} />
+      <rect x="-1.5" y={bob - 3} width="3" height="3.5" rx="0.6" fill={color} />
+      {/* Body shine */}
+      <rect x="-1" y={bob - 2.8} width="1" height="2" rx="0.4" fill="#FFF" opacity="0.1" />
       {/* Head */}
-      <rect x="-1.2" y={bob - 5.5} width="2.5" height="2.5" fill="#FFE0BD" />
+      <ellipse cx="0" cy={bob - 4.2} rx="1.4" ry="1.5" fill="#FFE0BD" />
       {/* Eyes */}
-      <rect x={flip > 0 ? -0.5 : -0.2} y={bob - 4.5} width="0.5" height="0.5" fill="#0F172A" />
-      <rect x={flip > 0 ? 0.5 : 0.8} y={bob - 4.5} width="0.5" height="0.5" fill="#0F172A" />
+      <circle cx={flip > 0 ? -0.4 : 0} cy={bob - 4.3} r="0.35" fill="#1A202C" />
+      <circle cx={flip > 0 ? 0.5 : 0.9} cy={bob - 4.3} r="0.35" fill="#1A202C" />
 
       {/* RSVP: balloon */}
       {type === "rsvp" && (
         <>
           <line x1="0" y1={bob - 5.5} x2={balloonSway * 0.4} y2={bob - 13}
-            stroke="#94A3B8" strokeWidth="0.3" />
+            stroke="#94A3B8" strokeWidth="0.25" />
           <ellipse cx={balloonSway * 0.6} cy={bob - 15} rx="2.2" ry="2.8"
-            fill={balloonColor} opacity="0.85" />
-          <ellipse cx={balloonSway * 0.6 - 0.5} cy={bob - 16} rx="0.8" ry="1"
-            fill="#FFF" opacity="0.3" />
+            fill={balloonColor} opacity="0.8" />
+          <ellipse cx={balloonSway * 0.6 - 0.6} cy={bob - 16.2} rx="0.7" ry="1"
+            fill="#FFF" opacity="0.35" />
         </>
       )}
       {/* VIP: crown */}
       {type === "vip" && (
         <>
-          <rect x="-1.5" y={bob - 6.5} width="3.5" height="1.2" fill="#FFD700" />
-          <rect x="-1" y={bob - 7.5} width="0.8" height="1" fill="#FFD700" />
-          <rect x="0.2" y={bob - 7.5} width="0.8" height="1" fill="#FFD700" />
-          <rect x="1.3" y={bob - 7.5} width="0.8" height="1" fill="#FFD700" />
+          <rect x="-1.5" y={bob - 6.2} width="3.2" height="1" rx="0.2" fill="#FFD700" />
+          <polygon points={`-1,${bob - 6.2} -0.5,${bob - 7.5} 0,${bob - 6.2}`} fill="#FFD700" />
+          <polygon points={`0,${bob - 6.2} 0.5,${bob - 7.8} 1,${bob - 6.2}`} fill="#FFD700" />
+          <polygon points={`1,${bob - 6.2} 1.5,${bob - 7.5} 2,${bob - 6.2}`} fill="#FFD700" />
+          <circle cx="-0.5" cy={bob - 7} r="0.3" fill="#FF6B6B" />
+          <circle cx="0.5" cy={bob - 7.3} r="0.3" fill="#4FC3F7" />
+          <circle cx="1.5" cy={bob - 7} r="0.3" fill="#81C784" />
         </>
       )}
       {/* Volunteer: hard hat */}
       {type === "volunteer" && (
-        <rect x="-1.8" y={bob - 6.5} width="4" height="1.5" rx="0.5" fill="#FBBF24" />
+        <>
+          <rect x="-1.8" y={bob - 6.2} width="3.8" height="1.2" rx="0.6" fill="#FBBF24" />
+          <rect x="-1.2" y={bob - 6.5} width="2.6" height="0.5" rx="0.2" fill="#FCD34D" />
+        </>
       )}
       {/* Vendor: chef hat */}
       {type === "vendor" && (
         <>
-          <rect x="-1" y={bob - 7.5} width="2.5" height="2.5" fill="#F0FDF4" />
-          <rect x="-0.5" y={bob - 8} width="1.5" height="1" fill="#F0FDF4" />
+          <rect x="-1.2" y={bob - 6.5} width="2.6" height="1.2" rx="0.2" fill="#F0FDF4" />
+          <ellipse cx="0" cy={bob - 7.5} rx="1.5" ry="1.2" fill="#F8FFFE" />
         </>
       )}
     </g>
   );
 }
 
-// ─── Isometric tree ────────────────────────────────────────────
+// ─── Isometric tree (smooth, layered canopy) ──────────────────
 function IsoTree({ gx, gy, size }: { gx: number; gy: number; size: number }) {
   const pos = gridToScreen(gx, gy);
   const s = size;
   return (
     <g>
-      {/* Shadow */}
-      <ellipse cx={pos.x + 2 * s} cy={pos.y + 3} rx={6 * s} ry={3 * s}
-        fill="#000" opacity="0.12" />
+      {/* Ground shadow */}
+      <ellipse cx={pos.x + 2 * s} cy={pos.y + 3} rx={7 * s} ry={3.5 * s}
+        fill="#000" opacity="0.1" />
       {/* Trunk */}
       <rect x={pos.x - 1.5 * s} y={pos.y - 5 * s} width={3 * s} height={8 * s}
-        fill="#5C3A1E" />
-      {/* Canopy layers (bottom to top, larger to smaller) */}
-      <ellipse cx={pos.x} cy={pos.y - 7 * s} rx={7 * s} ry={5 * s}
-        fill="#2D5016" />
-      <ellipse cx={pos.x} cy={pos.y - 10 * s} rx={5.5 * s} ry={4 * s}
-        fill="#3A6B1E" />
-      <ellipse cx={pos.x} cy={pos.y - 12 * s} rx={4 * s} ry={3 * s}
-        fill="#4A7C28" />
-      {/* Highlight */}
-      <ellipse cx={pos.x - 1 * s} cy={pos.y - 11 * s} rx={2 * s} ry={1.5 * s}
-        fill="#5A8C32" opacity="0.5" />
+        rx={0.8 * s} fill="#6B4226" />
+      <rect x={pos.x - 0.8 * s} y={pos.y - 5 * s} width={1.2 * s} height={8 * s}
+        rx={0.4 * s} fill="#7C5030" opacity="0.5" />
+      {/* Canopy layers – soft, organic shapes */}
+      <ellipse cx={pos.x + 1 * s} cy={pos.y - 6 * s} rx={7.5 * s} ry={5.5 * s}
+        fill="#2A5A14" />
+      <ellipse cx={pos.x - 0.5 * s} cy={pos.y - 8 * s} rx={6.5 * s} ry={5 * s}
+        fill="#337A1C" />
+      <ellipse cx={pos.x + 0.8 * s} cy={pos.y - 10 * s} rx={5 * s} ry={4 * s}
+        fill="#3D8B24" />
+      <ellipse cx={pos.x} cy={pos.y - 12 * s} rx={3.8 * s} ry={3 * s}
+        fill="#4A9C2E" />
+      {/* Highlight – sunlight catching the top */}
+      <ellipse cx={pos.x - 1 * s} cy={pos.y - 11 * s} rx={2.2 * s} ry={1.5 * s}
+        fill="#5CB838" opacity="0.45" />
+      <ellipse cx={pos.x + 0.5 * s} cy={pos.y - 12.5 * s} rx={1.2 * s} ry={0.8 * s}
+        fill="#72D050" opacity="0.3" />
     </g>
   );
 }
 
-// ─── Building wall decorations by zone ─────────────────────────
+// ─── Zone ground decorations (tables, equipment under tents) ──
 function BuildingDecor({ zone }: { zone: IsoZone }) {
   const { gx, gy, gw, gd, h } = zone;
+  const polys = isoBuildingPolys(gx, gy, gw, gd, h);
+
+  // Helper: place a table at normalized position within the zone footprint
+  const tableAt = (u: number, v: number, color: string) => {
+    const cx = polys.topCorner.x + u * (polys.rightCorner.x - polys.topCorner.x) + v * (polys.leftCorner.x - polys.topCorner.x);
+    const cy = polys.topCorner.y + u * (polys.rightCorner.y - polys.topCorner.y) + v * (polys.leftCorner.y - polys.topCorner.y);
+    return (
+      <g>
+        {/* Table shadow */}
+        <ellipse cx={cx} cy={cy + 2} rx="5" ry="2" fill="#000" opacity="0.06" />
+        {/* Table top (iso diamond) */}
+        <polygon
+          points={`${cx},${cy - 3} ${cx + 5},${cy - 1} ${cx},${cy + 1} ${cx - 5},${cy - 1}`}
+          fill={color} stroke="rgba(0,0,0,0.15)" strokeWidth="0.3"
+        />
+        {/* Table legs */}
+        <line x1={cx - 3} y1={cy - 1} x2={cx - 3} y2={cy + 2} stroke="#6B4226" strokeWidth="0.6" />
+        <line x1={cx + 3} y1={cy - 1} x2={cx + 3} y2={cy + 2} stroke="#6B4226" strokeWidth="0.6" />
+      </g>
+    );
+  };
 
   switch (zone.id) {
-    case "info": {
-      // Windows on left wall
-      const w1 = leftWallPoint(gx, gy, gw, gd, h, 0.25, 0.55);
-      const w2 = leftWallPoint(gx, gy, gw, gd, h, 0.55, 0.55);
-      const w3 = leftWallPoint(gx, gy, gw, gd, h, 0.85, 0.55);
-      // Door on right wall
-      const d1 = rightWallPoint(gx, gy, gw, gd, h, 0.45, 0.35);
-      // Flag
-      const polys = isoBuildingPolys(gx, gy, gw, gd, h);
+    case "info":
       return (
         <g>
-          {/* Windows */}
-          {[w1, w2, w3].map((w, i) => (
-            <g key={`w-${i}`}>
-              <rect x={w.x - 4} y={w.y - 5} width="8" height="8" fill="#BFDBFE" stroke="#1E40AF" strokeWidth="0.5" />
-              <line x1={w.x} y1={w.y - 5} x2={w.x} y2={w.y + 3} stroke="#1E40AF" strokeWidth="0.5" />
-              <line x1={w.x - 4} y1={w.y - 1} x2={w.x + 4} y2={w.y - 1} stroke="#1E40AF" strokeWidth="0.5" />
-            </g>
-          ))}
-          {/* Door */}
-          <rect x={d1.x - 4} y={d1.y - 8} width="8" height="12" rx="1" fill="#1E3A8A" />
-          <circle cx={d1.x + 2} cy={d1.y - 2} r="0.8" fill="#FBBF24" />
-          {/* SHCA Banner on roof */}
-          <rect x={polys.roofCenter.x - 14} y={polys.roofCenter.y - 8} width="28" height="10" rx="1" fill="#F8FAFC" opacity="0.9" />
-          <text x={polys.roofCenter.x} y={polys.roofCenter.y - 1} textAnchor="middle"
-            fill="#1D4ED8" fontSize="5.5" fontFamily="monospace" fontWeight="bold">SHCA</text>
+          {/* Info table with banner */}
+          {tableAt(0.45, 0.45, "#BFDBFE")}
+          {tableAt(0.7, 0.6, "#DBEAFE")}
+          {/* SHCA Banner hanging from canopy */}
+          <rect x={polys.roofCenter.x - 12} y={polys.roofCenter.y - 6} width="24" height="8" rx="1.5"
+            fill="#F8FAFC" opacity="0.9" />
+          <text x={polys.roofCenter.x} y={polys.roofCenter.y + 0.5} textAnchor="middle"
+            fill="#1D4ED8" fontSize="5" fontFamily="system-ui, sans-serif" fontWeight="800">SHCA</text>
           {/* Flag pole */}
-          <line x1={polys.roofCenter.x + 10} y1={polys.roofCenter.y - h * 0.1}
-            x2={polys.roofCenter.x + 10} y2={polys.roofCenter.y - h * 0.1 - 18}
-            stroke="#475569" strokeWidth="1" />
+          <line x1={polys.rTopCorner.x + 8} y1={polys.rTopCorner.y}
+            x2={polys.rTopCorner.x + 8} y2={polys.rTopCorner.y - 16}
+            stroke="#475569" strokeWidth="0.8" />
           <polygon
-            points={`${polys.roofCenter.x + 11},${polys.roofCenter.y - h * 0.1 - 18} ${polys.roofCenter.x + 20},${polys.roofCenter.y - h * 0.1 - 15} ${polys.roofCenter.x + 11},${polys.roofCenter.y - h * 0.1 - 12}`}
+            points={`${polys.rTopCorner.x + 9},${polys.rTopCorner.y - 16} ${polys.rTopCorner.x + 16},${polys.rTopCorner.y - 13.5} ${polys.rTopCorner.x + 9},${polys.rTopCorner.y - 11}`}
             fill="#2563EB" />
         </g>
       );
-    }
-    case "bouncy": {
-      const polys = isoBuildingPolys(gx, gy, gw, gd, h);
+    case "bouncy":
       return (
         <g>
-          {/* Turrets on roof */}
-          <rect x={polys.roofCenter.x - 18} y={polys.roofCenter.y - 10} width="6" height="10" fill="#F87171" />
-          <rect x={polys.roofCenter.x + 12} y={polys.roofCenter.y - 10} width="6" height="10" fill="#F87171" />
-          <rect x={polys.roofCenter.x - 3} y={polys.roofCenter.y - 14} width="6" height="14" fill="#FCA5A5" />
-          {/* Flag */}
-          <line x1={polys.roofCenter.x} y1={polys.roofCenter.y - 14}
-            x2={polys.roofCenter.x} y2={polys.roofCenter.y - 24}
-            stroke="#475569" strokeWidth="0.8" />
+          {/* Inflatable bounce pad on ground */}
           <polygon
-            points={`${polys.roofCenter.x + 1},${polys.roofCenter.y - 24} ${polys.roofCenter.x + 8},${polys.roofCenter.y - 22} ${polys.roofCenter.x + 1},${polys.roofCenter.y - 20}`}
+            points={`${polys.topCorner.x},${polys.topCorner.y + 2} ${polys.rightCorner.x - 8},${polys.rightCorner.y + 2} ${polys.bottomCorner.x},${polys.bottomCorner.y} ${polys.leftCorner.x + 8},${polys.leftCorner.y}`}
+            fill="#EF4444" opacity="0.35" rx="4"
+          />
+          {/* Puffy sides */}
+          <ellipse cx={polys.roofCenter.x - 10} cy={polys.bottomCorner.y - 2} rx="8" ry="4"
+            fill="#F87171" opacity="0.5" />
+          <ellipse cx={polys.roofCenter.x + 10} cy={polys.bottomCorner.y - 4} rx="8" ry="4"
+            fill="#FCA5A5" opacity="0.4" />
+          {/* Turrets/castle detail on ground */}
+          <rect x={polys.roofCenter.x - 12} y={polys.bottomCorner.y - 12} width="5" height="8" rx="1"
+            fill="#F87171" opacity="0.6" />
+          <rect x={polys.roofCenter.x + 7} y={polys.bottomCorner.y - 10} width="5" height="7" rx="1"
+            fill="#FCA5A5" opacity="0.5" />
+          {/* Flag */}
+          <line x1={polys.roofCenter.x} y1={polys.rTopCorner.y}
+            x2={polys.roofCenter.x} y2={polys.rTopCorner.y - 12}
+            stroke="#475569" strokeWidth="0.7" />
+          <polygon
+            points={`${polys.roofCenter.x + 1},${polys.rTopCorner.y - 12} ${polys.roofCenter.x + 7},${polys.rTopCorner.y - 10} ${polys.roofCenter.x + 1},${polys.rTopCorner.y - 8}`}
             fill="#FBBF24" />
-          {/* Entrance on left wall */}
-          {(() => {
-            const ep = leftWallPoint(gx, gy, gw, gd, h, 0.5, 0.35);
-            return <ellipse cx={ep.x} cy={ep.y} rx="5" ry="7" fill="#7F1D1D" />;
-          })()}
         </g>
       );
-    }
-    case "food": {
-      const polys = isoBuildingPolys(gx, gy, gw, gd, h);
-      // Serving window on right wall
-      const sw = rightWallPoint(gx, gy, gw, gd, h, 0.4, 0.6);
+    case "food":
       return (
         <g>
-          {/* Awning stripes on roof */}
-          <line x1={polys.rTopCorner.x + 5} y1={polys.rTopCorner.y + 3}
-            x2={polys.rBottomCorner.x + 5} y2={polys.rBottomCorner.y + 3}
-            stroke="#FFF" strokeWidth="2" opacity="0.3" />
-          <line x1={polys.rTopCorner.x + 15} y1={polys.rTopCorner.y + 3}
-            x2={polys.rBottomCorner.x + 15} y2={polys.rBottomCorner.y + 3}
-            stroke="#FFF" strokeWidth="2" opacity="0.3" />
-          {/* Serving window */}
-          <rect x={sw.x - 6} y={sw.y - 5} width="12" height="8" fill="#1E3A5F" stroke="#F97316" strokeWidth="0.5" />
-          {/* Smoke puffs */}
-          <circle cx={polys.roofCenter.x - 8} cy={polys.roofCenter.y - 12}
-            r="3" fill="#94A3B8" opacity="0.15" />
-          <circle cx={polys.roofCenter.x - 5} cy={polys.roofCenter.y - 18}
-            r="2.5" fill="#94A3B8" opacity="0.1" />
-          <circle cx={polys.roofCenter.x - 3} cy={polys.roofCenter.y - 23}
-            r="2" fill="#94A3B8" opacity="0.07" />
-        </g>
-      );
-    }
-    case "stage": {
-      const polys = isoBuildingPolys(gx, gy, gw, gd, h);
-      return (
-        <g>
-          {/* Stage lights on roof */}
-          <circle cx={polys.roofCenter.x - 10} cy={polys.roofCenter.y - 2}
-            r="3" fill="#FBBF24" opacity="0.7" />
-          <circle cx={polys.roofCenter.x - 10} cy={polys.roofCenter.y - 2}
-            r="5" fill="#FBBF24" opacity="0.15" />
-          <circle cx={polys.roofCenter.x + 5} cy={polys.roofCenter.y - 2}
-            r="3" fill="#EF4444" opacity="0.7" />
-          <circle cx={polys.roofCenter.x + 5} cy={polys.roofCenter.y - 2}
-            r="5" fill="#EF4444" opacity="0.15" />
-          <circle cx={polys.roofCenter.x + 20} cy={polys.roofCenter.y - 2}
-            r="3" fill="#3B82F6" opacity="0.7" />
-          <circle cx={polys.roofCenter.x + 20} cy={polys.roofCenter.y - 2}
-            r="5" fill="#3B82F6" opacity="0.15" />
-          {/* Speaker boxes on left wall */}
-          {(() => {
-            const sp1 = leftWallPoint(gx, gy, gw, gd, h, 0.2, 0.4);
-            const sp2 = leftWallPoint(gx, gy, gw, gd, h, 0.8, 0.4);
-            return (
-              <>
-                <rect x={sp1.x - 3} y={sp1.y - 4} width="6" height="8" fill="#111" stroke="#333" strokeWidth="0.5" />
-                <circle cx={sp1.x} cy={sp1.y} r="2" fill="#1E293B" />
-                <rect x={sp2.x - 3} y={sp2.y - 4} width="6" height="8" fill="#111" stroke="#333" strokeWidth="0.5" />
-                <circle cx={sp2.x} cy={sp2.y} r="2" fill="#1E293B" />
-              </>
-            );
-          })()}
-        </g>
-      );
-    }
-    case "games": {
-      const polys = isoBuildingPolys(gx, gy, gw, gd, h);
-      return (
-        <g>
-          {/* Tent stripes on roof */}
-          <line x1={polys.rTopCorner.x + 8} y1={polys.rTopCorner.y + 2}
-            x2={polys.rBottomCorner.x + 8} y2={polys.rBottomCorner.y + 2}
-            stroke="#FFF" strokeWidth="3" opacity="0.25" />
-          <line x1={polys.rTopCorner.x + 22} y1={polys.rTopCorner.y + 2}
-            x2={polys.rBottomCorner.x + 22} y2={polys.rBottomCorner.y + 2}
-            stroke="#FFF" strokeWidth="3" opacity="0.25" />
-          {/* Pennant flags */}
-          {[0, 1, 2, 3].map((i) => {
-            const fx = polys.roofCenter.x - 15 + i * 10;
-            const fy = polys.roofCenter.y - 8;
-            const colors = ["#EF4444", "#FBBF24", "#3B82F6", "#22C55E"];
-            return (
-              <polygon key={`pf-${i}`}
-                points={`${fx},${fy} ${fx + 4},${fy} ${fx + 2},${fy + 5}`}
-                fill={colors[i]} />
-            );
-          })}
-        </g>
-      );
-    }
-    case "petting": {
-      // Fence posts on walls
-      const polys = isoBuildingPolys(gx, gy, gw, gd, h);
-      return (
-        <g>
-          {/* Fence rail along roof */}
-          <polygon points={polys.roof} fill="none" stroke="#8B6914" strokeWidth="1.5" strokeDasharray="4 2" />
-          {/* Small animals on roof */}
-          <ellipse cx={polys.roofCenter.x - 8} cy={polys.roofCenter.y + 2} rx="3" ry="2" fill="#F0F0F0" />
-          <circle cx={polys.roofCenter.x - 10} cy={polys.roofCenter.y} r="1.5" fill="#E5E5E5" />
-          <ellipse cx={polys.roofCenter.x + 8} cy={polys.roofCenter.y + 1} rx="2.5" ry="1.8" fill="#C4956A" />
-          <circle cx={polys.roofCenter.x + 6} cy={polys.roofCenter.y - 0.5} r="1.3" fill="#B8856A" />
-        </g>
-      );
-    }
-    case "facepainting": {
-      const polys = isoBuildingPolys(gx, gy, gw, gd, h);
-      return (
-        <g>
-          {/* Tent stripes */}
+          {/* Food tables */}
+          {tableAt(0.3, 0.35, "#FED7AA")}
+          {tableAt(0.6, 0.5, "#FFEDD5")}
+          {tableAt(0.4, 0.7, "#FEE2E2")}
+          {/* Canopy stripes */}
           <line x1={polys.rTopCorner.x + 6} y1={polys.rTopCorner.y + 2}
             x2={polys.rBottomCorner.x + 6} y2={polys.rBottomCorner.y + 2}
-            stroke="#FFF" strokeWidth="2" opacity="0.3" />
-          {/* Paint splotches on roof */}
-          <circle cx={polys.roofCenter.x - 5} cy={polys.roofCenter.y} r="2.5" fill="#EF4444" opacity="0.6" />
-          <circle cx={polys.roofCenter.x + 3} cy={polys.roofCenter.y + 2} r="2" fill="#3B82F6" opacity="0.6" />
-          <circle cx={polys.roofCenter.x + 8} cy={polys.roofCenter.y - 1} r="1.8" fill="#FBBF24" opacity="0.6" />
+            stroke="#FFF" strokeWidth="1.5" opacity="0.25" />
+          <line x1={polys.rTopCorner.x + 16} y1={polys.rTopCorner.y + 2}
+            x2={polys.rBottomCorner.x + 16} y2={polys.rBottomCorner.y + 2}
+            stroke="#FFF" strokeWidth="1.5" opacity="0.25" />
+          {/* Smoke puffs rising above canopy */}
+          <circle cx={polys.roofCenter.x - 6} cy={polys.roofCenter.y - 10}
+            r="2.5" fill="#94A3B8" opacity="0.12" />
+          <circle cx={polys.roofCenter.x - 4} cy={polys.roofCenter.y - 16}
+            r="2" fill="#94A3B8" opacity="0.08" />
+          <circle cx={polys.roofCenter.x - 2} cy={polys.roofCenter.y - 21}
+            r="1.5" fill="#94A3B8" opacity="0.05" />
         </g>
       );
-    }
-    case "sponsors": {
-      const polys = isoBuildingPolys(gx, gy, gw, gd, h);
+    case "stage":
       return (
         <g>
-          {/* Tent stripes on roof */}
-          <line x1={polys.rTopCorner.x + 8} y1={polys.rTopCorner.y + 2}
-            x2={polys.rBottomCorner.x + 8} y2={polys.rBottomCorner.y + 2}
-            stroke="#FFF" strokeWidth="2" opacity="0.25" />
-          {/* Banner stands */}
-          <rect x={polys.roofCenter.x - 12} y={polys.roofCenter.y - 6}
-            width="10" height="8" fill="#F472B6" stroke="#DB2777" strokeWidth="0.5" />
-          <rect x={polys.roofCenter.x + 4} y={polys.roofCenter.y - 5}
-            width="10" height="8" fill="#FDE68A" stroke="#D97706" strokeWidth="0.5" />
+          {/* Stage platform on ground */}
+          <polygon
+            points={`${polys.topCorner.x + 5},${polys.topCorner.y + 3} ${polys.rightCorner.x - 5},${polys.rightCorner.y + 2} ${polys.bottomCorner.x - 2},${polys.bottomCorner.y - 1} ${polys.leftCorner.x + 5},${polys.leftCorner.y - 1}`}
+            fill="#4A3728" opacity="0.5"
+          />
+          {/* Speaker stacks on ground */}
+          <rect x={polys.leftCorner.x + 10} y={polys.leftCorner.y - 8} width="5" height="6" rx="0.5"
+            fill="#1A1A1A" stroke="#333" strokeWidth="0.3" />
+          <circle cx={polys.leftCorner.x + 12.5} cy={polys.leftCorner.y - 5.5} r="1.5" fill="#2D2D2D" />
+          <rect x={polys.rightCorner.x - 15} y={polys.rightCorner.y - 6} width="5" height="6" rx="0.5"
+            fill="#1A1A1A" stroke="#333" strokeWidth="0.3" />
+          <circle cx={polys.rightCorner.x - 12.5} cy={polys.rightCorner.y - 3.5} r="1.5" fill="#2D2D2D" />
+          {/* Stage lights hanging from canopy */}
+          <circle cx={polys.roofCenter.x - 10} cy={polys.roofCenter.y + 5}
+            r="2" fill="#FBBF24" opacity="0.7" filter="url(#glow)" />
+          <circle cx={polys.roofCenter.x + 3} cy={polys.roofCenter.y + 5}
+            r="2" fill="#EF4444" opacity="0.7" filter="url(#glow)" />
+          <circle cx={polys.roofCenter.x + 16} cy={polys.roofCenter.y + 5}
+            r="2" fill="#3B82F6" opacity="0.7" filter="url(#glow)" />
         </g>
       );
-    }
+    case "games":
+      return (
+        <g>
+          {/* Cornhole boards on ground */}
+          <polygon
+            points={`${polys.bottomCorner.x - 12},${polys.bottomCorner.y - 8} ${polys.bottomCorner.x - 6},${polys.bottomCorner.y - 10} ${polys.bottomCorner.x - 3},${polys.bottomCorner.y - 7} ${polys.bottomCorner.x - 9},${polys.bottomCorner.y - 5}`}
+            fill="#C4956A" stroke="#8B6914" strokeWidth="0.3"
+          />
+          <circle cx={polys.bottomCorner.x - 8} cy={polys.bottomCorner.y - 7.5} r="1" fill="#1A1A1A" />
+          {/* Pennant flags between canopy poles */}
+          {[0, 1, 2, 3, 4].map((i) => {
+            const t = (i + 0.5) / 5;
+            const fx = polys.rLeftCorner.x + t * (polys.rBottomCorner.x - polys.rLeftCorner.x);
+            const fy = polys.rLeftCorner.y + t * (polys.rBottomCorner.y - polys.rLeftCorner.y) + 3;
+            const colors = ["#EF4444", "#FBBF24", "#3B82F6", "#22C55E", "#A855F7"];
+            return (
+              <polygon key={`pf-${i}`}
+                points={`${fx - 1.5},${fy} ${fx + 1.5},${fy} ${fx},${fy + 3.5}`}
+                fill={colors[i]} opacity="0.8" />
+            );
+          })}
+          {/* Ladder toss frame */}
+          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 10} width="1" height="8" fill="#6B6B6B" />
+          <rect x={polys.roofCenter.x + 12} y={polys.bottomCorner.y - 10} width="1" height="8" fill="#6B6B6B" />
+          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 10} width="8" height="1" fill="#6B6B6B" />
+          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 7} width="8" height="1" fill="#6B6B6B" />
+          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 4} width="8" height="1" fill="#6B6B6B" />
+        </g>
+      );
+    case "petting":
+      return (
+        <g>
+          {/* Wooden fence enclosure on ground */}
+          <polygon
+            points={`${polys.topCorner.x},${polys.topCorner.y + 3} ${polys.rightCorner.x},${polys.rightCorner.y + 2} ${polys.bottomCorner.x},${polys.bottomCorner.y} ${polys.leftCorner.x},${polys.leftCorner.y + 1}`}
+            fill="none" stroke="#A08040" strokeWidth="1.2" strokeDasharray="3 2"
+          />
+          {/* Hay on ground */}
+          <ellipse cx={polys.bottomCorner.x - 5} cy={polys.bottomCorner.y - 3} rx="4" ry="2"
+            fill="#D4A854" opacity="0.4" />
+          <ellipse cx={polys.bottomCorner.x + 8} cy={polys.bottomCorner.y - 5} rx="3" ry="1.5"
+            fill="#C8A048" opacity="0.3" />
+          {/* Small animals */}
+          <ellipse cx={polys.roofCenter.x - 6} cy={polys.bottomCorner.y - 4} rx="3" ry="2"
+            fill="#F0F0F0" />
+          <circle cx={polys.roofCenter.x - 8} cy={polys.bottomCorner.y - 5.5} r="1.5" fill="#E8E8E8" />
+          <ellipse cx={polys.roofCenter.x + 8} cy={polys.bottomCorner.y - 3} rx="2.5" ry="1.8"
+            fill="#C4956A" />
+          <circle cx={polys.roofCenter.x + 6.5} cy={polys.bottomCorner.y - 4.5} r="1.2" fill="#B8856A" />
+          {/* Tiny chick */}
+          <circle cx={polys.roofCenter.x + 2} cy={polys.bottomCorner.y - 1.5} r="1" fill="#FDE047" />
+          <circle cx={polys.roofCenter.x + 2.5} cy={polys.bottomCorner.y - 2.5} r="0.7" fill="#FDE047" />
+        </g>
+      );
+    case "facepainting":
+      return (
+        <g>
+          {/* Tables with paint supplies */}
+          {tableAt(0.4, 0.4, "#E9D5FF")}
+          {tableAt(0.65, 0.6, "#FCE7F3")}
+          {/* Paint splotch decorations on canopy */}
+          <circle cx={polys.roofCenter.x - 6} cy={polys.roofCenter.y + 1} r="2.2" fill="#EF4444" opacity="0.45" />
+          <circle cx={polys.roofCenter.x + 3} cy={polys.roofCenter.y + 3} r="1.8" fill="#3B82F6" opacity="0.45" />
+          <circle cx={polys.roofCenter.x + 8} cy={polys.roofCenter.y} r="1.5" fill="#FBBF24" opacity="0.45" />
+          {/* Canvas on canopy stripe */}
+          <line x1={polys.rTopCorner.x + 5} y1={polys.rTopCorner.y + 2}
+            x2={polys.rBottomCorner.x + 5} y2={polys.rBottomCorner.y + 2}
+            stroke="#FFF" strokeWidth="1.5" opacity="0.2" />
+        </g>
+      );
+    case "sponsors":
+      return (
+        <g>
+          {/* Display tables */}
+          {tableAt(0.35, 0.4, "#FBCFE8")}
+          {tableAt(0.6, 0.55, "#FEF3C7")}
+          {/* Banner stands next to tables */}
+          <rect x={polys.roofCenter.x - 14} y={polys.bottomCorner.y - 12}
+            width="1" height="10" fill="#6B6B6B" />
+          <rect x={polys.roofCenter.x - 18} y={polys.bottomCorner.y - 12}
+            width="9" height="6" rx="0.5" fill="#F472B6" opacity="0.7" stroke="#DB2777" strokeWidth="0.3" />
+          <rect x={polys.roofCenter.x + 8} y={polys.bottomCorner.y - 10}
+            width="1" height="10" fill="#6B6B6B" />
+          <rect x={polys.roofCenter.x + 5} y={polys.bottomCorner.y - 10}
+            width="9" height="6" rx="0.5" fill="#FDE68A" opacity="0.7" stroke="#D97706" strokeWidth="0.3" />
+          {/* Canopy stripe */}
+          <line x1={polys.rTopCorner.x + 8} y1={polys.rTopCorner.y + 2}
+            x2={polys.rBottomCorner.x + 8} y2={polys.rBottomCorner.y + 2}
+            stroke="#FFF" strokeWidth="1.5" opacity="0.2" />
+        </g>
+      );
     default:
       return null;
   }
@@ -420,9 +452,17 @@ function IsoBench({ gx, gy }: { gx: number; gy: number }) {
   const pos = gridToScreen(gx, gy);
   return (
     <g>
-      <rect x={pos.x - 5} y={pos.y - 2} width="10" height="3" fill="#A0714D" stroke="#6B4226" strokeWidth="0.5" />
-      <rect x={pos.x - 4} y={pos.y + 1} width="2" height="3" fill="#5C2D0E" />
-      <rect x={pos.x + 2} y={pos.y + 1} width="2" height="3" fill="#5C2D0E" />
+      {/* Shadow */}
+      <ellipse cx={pos.x} cy={pos.y + 4} rx="6" ry="1.5" fill="#000" opacity="0.08" />
+      {/* Seat */}
+      <rect x={pos.x - 5} y={pos.y - 2} width="10" height="2.5" rx="0.5"
+        fill="#B8845C" stroke="rgba(0,0,0,0.15)" strokeWidth="0.4" />
+      {/* Seat highlight */}
+      <rect x={pos.x - 4.5} y={pos.y - 1.8} width="9" height="0.8" rx="0.3"
+        fill="#C8946C" opacity="0.6" />
+      {/* Legs */}
+      <rect x={pos.x - 4} y={pos.y + 0.5} width="1.5" height="3" rx="0.3" fill="#6B4226" />
+      <rect x={pos.x + 2.5} y={pos.y + 0.5} width="1.5" height="3" rx="0.3" fill="#6B4226" />
     </g>
   );
 }
@@ -432,10 +472,17 @@ function IsoLamp({ gx, gy }: { gx: number; gy: number }) {
   const pos = gridToScreen(gx, gy);
   return (
     <g>
-      <rect x={pos.x - 0.5} y={pos.y - 14} width="1.5" height="14" fill="#5C5C5C" />
-      <rect x={pos.x - 3} y={pos.y - 16} width="7" height="2.5" fill="#707070" rx="1" />
-      <circle cx={pos.x + 0.5} cy={pos.y - 15} r="4" fill="#FBBF24" opacity="0.1" />
-      <circle cx={pos.x + 0.5} cy={pos.y - 15.5} r="1.5" fill="#FDE68A" opacity="0.5" />
+      {/* Glow on ground */}
+      <ellipse cx={pos.x + 0.5} cy={pos.y + 1} rx="5" ry="2" fill="#FBBF24" opacity="0.04" />
+      {/* Post */}
+      <rect x={pos.x - 0.4} y={pos.y - 14} width="1.2" height="14" rx="0.4" fill="#6B6B6B" />
+      <rect x={pos.x - 0.1} y={pos.y - 14} width="0.5" height="14" rx="0.2"
+        fill="#808080" opacity="0.4" />
+      {/* Lamp housing */}
+      <rect x={pos.x - 2.5} y={pos.y - 16} width="6" height="2.2" rx="1" fill="#808080" />
+      {/* Light glow */}
+      <circle cx={pos.x + 0.5} cy={pos.y - 14.8} r="5" fill="#FBBF24" opacity="0.06" />
+      <circle cx={pos.x + 0.5} cy={pos.y - 15} r="1.8" fill="#FDE68A" opacity="0.45" />
     </g>
   );
 }
@@ -445,8 +492,13 @@ function IsoTrashBin({ gx, gy }: { gx: number; gy: number }) {
   const pos = gridToScreen(gx, gy);
   return (
     <g>
-      <rect x={pos.x - 2} y={pos.y - 5} width="4" height="5" fill="#4B5563" stroke="#374151" strokeWidth="0.5" />
-      <rect x={pos.x - 2.5} y={pos.y - 6} width="5" height="1.5" fill="#6B7280" />
+      {/* Shadow */}
+      <ellipse cx={pos.x} cy={pos.y + 1} rx="3" ry="1" fill="#000" opacity="0.08" />
+      {/* Body */}
+      <rect x={pos.x - 2} y={pos.y - 5} width="4" height="5" rx="0.5"
+        fill="#5B6573" stroke="rgba(0,0,0,0.12)" strokeWidth="0.4" />
+      {/* Lid */}
+      <rect x={pos.x - 2.5} y={pos.y - 6} width="5" height="1.3" rx="0.6" fill="#7B8290" />
     </g>
   );
 }
@@ -509,17 +561,82 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
 
   return (
     <svg
-      viewBox="80 -120 800 700"
+      viewBox="80 -80 800 520"
       className="w-full h-full"
       preserveAspectRatio="xMidYMid meet"
-      style={{ imageRendering: "pixelated" }}
     >
       <defs>
+        {/* ═══ SKY GRADIENT ═══ */}
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7EC8E3" />
-          <stop offset="55%" stopColor="#B5E3F5" />
-          <stop offset="100%" stopColor="#D4F0D4" />
+          <stop offset="0%" stopColor="#87CEEB" />
+          <stop offset="40%" stopColor="#B0E0F0" />
+          <stop offset="70%" stopColor="#C8ECD0" />
+          <stop offset="100%" stopColor="#A8D5A0" />
         </linearGradient>
+
+        {/* ═══ BUILDING SHADOW FILTER ═══ */}
+        <filter id="buildingShadow" x="-20%" y="-10%" width="150%" height="140%">
+          <feDropShadow dx="3" dy="4" stdDeviation="3" floodColor="#000" floodOpacity="0.25" />
+        </filter>
+
+        {/* ═══ SOFT GLOW for lights ═══ */}
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        {/* ═══ SUN GLOW ═══ */}
+        <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#FFF8DC" stopOpacity="1" />
+          <stop offset="40%" stopColor="#FFE066" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#FFE066" stopOpacity="0" />
+        </radialGradient>
+
+        {/* ═══ GRASS TEXTURE GRADIENT ═══ */}
+        <linearGradient id="grassLight" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#3D8B2A" />
+          <stop offset="100%" stopColor="#2E6B1C" />
+        </linearGradient>
+        <linearGradient id="grassDark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#357826" />
+          <stop offset="100%" stopColor="#2A6118" />
+        </linearGradient>
+
+        {/* ═══ PATH GRADIENTS ═══ */}
+        <linearGradient id="pathLight" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#D4BA82" />
+          <stop offset="100%" stopColor="#C4A66C" />
+        </linearGradient>
+        <linearGradient id="pathDark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#C8AE72" />
+          <stop offset="100%" stopColor="#B89858" />
+        </linearGradient>
+
+        {/* ═══ ROOF GRADIENTS (per zone) ═══ */}
+        {ISO_ZONES.map((zone) => (
+          <React.Fragment key={`grad-${zone.id}`}>
+            <linearGradient id={`roof-${zone.id}`} x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor={zone.colors.roof} />
+              <stop offset="100%" stopColor={zone.colors.leftWall} />
+            </linearGradient>
+            <linearGradient id={`lwall-${zone.id}`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={zone.colors.leftWall} />
+              <stop offset="80%" stopColor={zone.colors.rightWall} />
+            </linearGradient>
+            <linearGradient id={`rwall-${zone.id}`} x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={zone.colors.rightWall} stopOpacity="0.9" />
+              <stop offset="100%" stopColor={zone.colors.rightWall} />
+            </linearGradient>
+          </React.Fragment>
+        ))}
+
+        {/* ═══ CLOUD FILTER ═══ */}
+        <filter id="cloudSoft" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1.5" />
+        </filter>
       </defs>
 
       {/* ═══ SKY ═══ */}
@@ -528,43 +645,47 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
       {/* Dark green ground (outside the park) */}
       <rect x="80" y="130" width="800" height="500" fill="#1A5C10" />
 
-      {/* Clouds */}
+      {/* Sun glow (behind clouds) */}
+      <circle cx="780" cy="28" r="50" fill="url(#sunGlow)" />
+      <circle cx="780" cy="28" r="18" fill="#FFF8DC" />
+      <circle cx="776" cy="24" r="5" fill="#FFFEF0" opacity="0.6" />
+
+      {/* Clouds – soft, multi-layered */}
       {[
-        { bx: 200, by: 22, s: 1, spd: 0.02 },
-        { bx: 420, by: 12, s: 0.85, spd: 0.015 },
-        { bx: 650, by: 28, s: 0.9, spd: 0.025 },
-        { bx: 130, by: 45, s: 0.7, spd: 0.018 },
+        { bx: 180, by: 18, s: 1.2, spd: 0.015 },
+        { bx: 350, by: 8, s: 1.0, spd: 0.012 },
+        { bx: 520, by: 22, s: 0.85, spd: 0.02 },
+        { bx: 680, by: 14, s: 0.95, spd: 0.018 },
+        { bx: 130, by: 42, s: 0.65, spd: 0.01 },
+        { bx: 450, by: 46, s: 0.55, spd: 0.008 },
       ].map((c, i) => {
-        const drift = (frame * c.spd) % 30 - 15;
+        const drift = (frame * c.spd) % 40 - 20;
         return (
-          <g key={`cloud-${i}`} opacity={0.75}>
-            <ellipse cx={c.bx + drift - 10} cy={c.by + 4} rx={16 * c.s} ry={5 * c.s} fill="#FFF" />
-            <ellipse cx={c.bx + drift} cy={c.by} rx={20 * c.s} ry={7 * c.s} fill="#FFF" />
-            <ellipse cx={c.bx + drift + 12} cy={c.by + 3} rx={14 * c.s} ry={5 * c.s} fill="#FFF" />
+          <g key={`cloud-${i}`} opacity={0.65} filter="url(#cloudSoft)">
+            <ellipse cx={c.bx + drift - 14} cy={c.by + 5} rx={18 * c.s} ry={6 * c.s} fill="#FFF" />
+            <ellipse cx={c.bx + drift} cy={c.by} rx={24 * c.s} ry={8 * c.s} fill="#FFF" />
+            <ellipse cx={c.bx + drift + 16} cy={c.by + 4} rx={16 * c.s} ry={6 * c.s} fill="#FFF" />
+            <ellipse cx={c.bx + drift + 6} cy={c.by - 3} rx={12 * c.s} ry={5 * c.s} fill="#FFF" opacity="0.7" />
           </g>
         );
       })}
 
-      {/* Sun */}
-      <circle cx="780" cy="38" r="18" fill="#FFE066" />
-      <circle cx="780" cy="38" r="26" fill="#FFE066" opacity="0.1" />
-      <circle cx="776" cy="33" r="6" fill="#FFF8C4" opacity="0.4" />
-
-      {/* ═══ GROUND TILES (Diamond checkered pattern) ═══ */}
+      {/* ═══ GROUND TILES (Diamond checkered pattern with gradients) ═══ */}
       {Array.from({ length: GRID_ROWS }).map((_, row) =>
         Array.from({ length: GRID_COLS }).map((_, col) => {
           const path = isPathTile(col, row);
           const fill = path
-            ? ((row + col) % 2 === 0 ? "#C4A46C" : "#B89858")
-            : ((row + col) % 2 === 0 ? "#3A7D22" : "#347020");
-          const stroke = path ? "#A88A50" : "#2D6B1A";
+            ? ((row + col) % 2 === 0 ? "url(#pathLight)" : "url(#pathDark)")
+            : ((row + col) % 2 === 0 ? "url(#grassLight)" : "url(#grassDark)");
+          const stroke = path ? "#B89858" : "#2A6118";
           return (
             <polygon
               key={`tile-${row}-${col}`}
               points={tileDiamond(col, row)}
               fill={fill}
               stroke={stroke}
-              strokeWidth="0.4"
+              strokeWidth="0.3"
+              strokeOpacity="0.5"
             />
           );
         })
@@ -576,77 +697,153 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
         const tr = gridToScreen(GRID_COLS, 0);
         const br = gridToScreen(GRID_COLS, GRID_ROWS);
         const bl = gridToScreen(0, GRID_ROWS);
+        const pts = `${tl.x},${tl.y} ${tr.x},${tr.y} ${br.x},${br.y} ${bl.x},${bl.y}`;
         return (
-          <polygon
-            points={`${tl.x},${tl.y} ${tr.x},${tr.y} ${br.x},${br.y} ${bl.x},${bl.y}`}
-            fill="none"
-            stroke="#5C3A1E"
-            strokeWidth="2"
-            strokeDasharray="6 3"
-          />
+          <g>
+            {/* Fence shadow */}
+            <polygon
+              points={pts}
+              fill="none"
+              stroke="#000"
+              strokeWidth="3"
+              strokeOpacity="0.08"
+              transform="translate(1,2)"
+            />
+            {/* Fence */}
+            <polygon
+              points={pts}
+              fill="none"
+              stroke="#7C5A2E"
+              strokeWidth="1.8"
+              strokeLinejoin="round"
+            />
+            {/* Fence highlight */}
+            <polygon
+              points={pts}
+              fill="none"
+              stroke="#A08050"
+              strokeWidth="0.6"
+              strokeDasharray="8 4"
+              strokeOpacity="0.5"
+            />
+          </g>
         );
       })()}
 
-      {/* ═══ BUILDINGS (sorted back-to-front) ═══ */}
+      {/* ═══ ZONES (open tents, canopies & tables – sorted back-to-front) ═══ */}
       {sortedZones.map((zone) => {
         const polys = isoBuildingPolys(zone.gx, zone.gy, zone.gw, zone.gd, zone.h);
         const isHovered = hoveredZone === zone.id;
         const isSelected = selectedZoneId === zone.id;
 
+        // Corner positions for tent poles
+        const bl = polys.leftCorner;   // base left
+        const br = polys.bottomCorner; // base bottom
+        const bRight = polys.rightCorner; // base right
+        const bTop = polys.topCorner;  // base top
+
         return (
-          <g key={zone.id}>
-            {/* Building shadow on ground */}
+          <g key={zone.id} filter="url(#buildingShadow)">
+            {/* Ground pad – subtle colored area under the tent */}
             <polygon
-              points={polys.leftWall}
-              fill="#000" opacity="0.06"
-              transform="translate(5, 5)"
-            />
-            <polygon
-              points={polys.rightWall}
-              fill="#000" opacity="0.06"
-              transform="translate(5, 5)"
+              points={`${bTop.x},${bTop.y} ${bRight.x},${bRight.y} ${br.x},${br.y} ${bl.x},${bl.y}`}
+              fill={zone.colors.roof}
+              opacity="0.08"
             />
 
-            {/* Left wall */}
-            <polygon
-              points={polys.leftWall}
-              fill={zone.colors.leftWall}
-              stroke="#000" strokeWidth="0.5"
-            />
+            {/* Tent poles at corners */}
+            {[
+              { base: bl, roof: polys.rLeftCorner },
+              { base: br, roof: polys.rBottomCorner },
+              { base: bRight, roof: polys.rRightCorner },
+              { base: bTop, roof: polys.rTopCorner },
+            ].map((pole, i) => (
+              <line key={`pole-${zone.id}-${i}`}
+                x1={pole.base.x} y1={pole.base.y}
+                x2={pole.roof.x} y2={pole.roof.y}
+                stroke="#8B7355" strokeWidth="1.2" strokeLinecap="round"
+              />
+            ))}
 
-            {/* Right wall */}
-            <polygon
-              points={polys.rightWall}
-              fill={zone.colors.rightWall}
-              stroke="#000" strokeWidth="0.5"
-            />
-
-            {/* Roof */}
+            {/* Tent canopy (translucent roof) */}
             <polygon
               points={polys.roof}
-              fill={zone.colors.roof}
-              stroke={isSelected ? "#FFE066" : isHovered ? "#FFF" : "#000"}
-              strokeWidth={isSelected ? "2.5" : isHovered ? "1.5" : "0.5"}
+              fill={`url(#roof-${zone.id})`}
+              opacity={isHovered ? "0.75" : "0.6"}
+              stroke={isSelected ? "#FFE066" : isHovered ? "#FFF" : zone.colors.roof}
+              strokeWidth={isSelected ? "2" : isHovered ? "1.5" : "0.6"}
+              strokeLinejoin="round"
+              style={{ transition: "opacity 0.2s" }}
+            />
+            {/* Canopy highlight stripe */}
+            <polygon
+              points={polys.roof}
+              fill="#FFF"
+              opacity={isHovered ? "0.15" : "0.08"}
+              style={{ pointerEvents: "none" }}
             />
 
-            {/* Zone decorations */}
+            {/* Scalloped edge – left valance */}
+            {(() => {
+              const edgePoints: string[] = [];
+              const steps = 6;
+              for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const x = polys.rLeftCorner.x + t * (polys.rBottomCorner.x - polys.rLeftCorner.x);
+                const y = polys.rLeftCorner.y + t * (polys.rBottomCorner.y - polys.rLeftCorner.y);
+                const scallop = Math.sin(t * Math.PI * steps) * 2;
+                edgePoints.push(`${x},${y + scallop + 2}`);
+              }
+              const topEdge = `${polys.rBottomCorner.x},${polys.rBottomCorner.y} ${polys.rLeftCorner.x},${polys.rLeftCorner.y}`;
+              return (
+                <polygon
+                  points={`${polys.rLeftCorner.x},${polys.rLeftCorner.y} ${edgePoints.join(" ")} ${polys.rBottomCorner.x},${polys.rBottomCorner.y}`}
+                  fill={zone.colors.leftWall}
+                  opacity="0.4"
+                />
+              );
+            })()}
+
+            {/* Scalloped edge – right valance */}
+            {(() => {
+              const edgePoints: string[] = [];
+              const steps = 6;
+              for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const x = polys.rBottomCorner.x + t * (polys.rRightCorner.x - polys.rBottomCorner.x);
+                const y = polys.rBottomCorner.y + t * (polys.rRightCorner.y - polys.rBottomCorner.y);
+                const scallop = Math.sin(t * Math.PI * steps) * 2;
+                edgePoints.push(`${x},${y + scallop + 2}`);
+              }
+              return (
+                <polygon
+                  points={`${polys.rBottomCorner.x},${polys.rBottomCorner.y} ${edgePoints.join(" ")} ${polys.rRightCorner.x},${polys.rRightCorner.y}`}
+                  fill={zone.colors.rightWall}
+                  opacity="0.35"
+                />
+              );
+            })()}
+
+            {/* Zone-specific ground items (tables, equipment, etc.) */}
             <BuildingDecor zone={zone} />
 
-            {/* Label on roof */}
+            {/* Label on canopy */}
             <text
               x={polys.roofCenter.x}
-              y={polys.roofCenter.y + (zone.id === "info" ? 8 : 3)}
+              y={polys.roofCenter.y + 2}
               textAnchor="middle"
               fill="#FFF"
-              fontSize="4.5"
-              fontFamily="monospace"
-              fontWeight="bold"
+              fontSize="4.2"
+              fontFamily="system-ui, -apple-system, sans-serif"
+              fontWeight="700"
+              letterSpacing="0.5"
+              stroke="rgba(0,0,0,0.4)" strokeWidth="0.4" paintOrder="stroke"
               style={{ pointerEvents: "none" }}
             >
-              {zone.id !== "info" ? zone.label.toUpperCase() : ""}
+              {zone.label.toUpperCase()}
             </text>
 
-            {/* Click targets (invisible overlays for interaction) */}
+            {/* Click targets (generous hit area) */}
             <polygon
               points={polys.roof}
               fill="transparent"
@@ -656,15 +853,7 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
               onClick={() => handleZoneClick(zone)}
             />
             <polygon
-              points={polys.leftWall}
-              fill="transparent"
-              className="cursor-pointer"
-              onMouseEnter={() => setHoveredZone(zone.id)}
-              onMouseLeave={() => setHoveredZone(null)}
-              onClick={() => handleZoneClick(zone)}
-            />
-            <polygon
-              points={polys.rightWall}
+              points={`${bTop.x},${bTop.y} ${bRight.x},${bRight.y} ${br.x},${br.y} ${bl.x},${bl.y}`}
               fill="transparent"
               className="cursor-pointer"
               onMouseEnter={() => setHoveredZone(zone.id)}
@@ -723,9 +912,10 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
               y={gatePolys.roofCenter.y + 2}
               textAnchor="middle"
               fill="#4ADE80"
-              fontSize="4"
-              fontFamily="monospace"
-              fontWeight="bold"
+              fontSize="3.8"
+              fontFamily="system-ui, -apple-system, sans-serif"
+              fontWeight="700"
+              letterSpacing="1.5"
             >
               ENTRANCE
             </text>
@@ -738,58 +928,6 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
               r="2.5" fill="#FBBF24" opacity="0.5" />
             <circle cx={gatePolys.roofCenter.x + 15} cy={gatePolys.roofCenter.y - 5}
               r="5" fill="#FBBF24" opacity="0.08" />
-          </g>
-        );
-      })()}
-
-      {/* ═══ PARKING LOT ═══ */}
-      {(() => {
-        const parkPolys = isoBuildingPolys(0, 8, 5, 2, 2);
-        return (
-          <g>
-            <polygon points={parkPolys.roof} fill="#4A4A4A" stroke="#333" strokeWidth="0.5" />
-            {/* Parking lines */}
-            {[1, 2, 3, 4].map((i) => {
-              const p1 = gridToScreen(i, 8);
-              const p2 = gridToScreen(i, 10);
-              return (
-                <line key={`pline-${i}`}
-                  x1={p1.x} y1={p1.y - 2} x2={p2.x} y2={p2.y - 2}
-                  stroke="#6B6B6B" strokeWidth="0.5" opacity="0.6" />
-              );
-            })}
-            {/* Cars */}
-            {[
-              { col: 0.5, row: 8.5, color: "#D32F2F" },
-              { col: 1.5, row: 9, color: "#1976D2" },
-              { col: 2.5, row: 8.5, color: "#F9A825" },
-              { col: 3.5, row: 9, color: "#388E3C" },
-              { col: 4, row: 8.8, color: "#7B1FA2" },
-            ].map((car, i) => {
-              const cp = gridToScreen(car.col, car.row);
-              return (
-                <g key={`car-${i}`}>
-                  <rect x={cp.x - 5} y={cp.y - 5} width="10" height="6"
-                    rx="1.5" fill={car.color} />
-                  <rect x={cp.x - 3} y={cp.y - 7} width="6" height="3"
-                    rx="1" fill={car.color} opacity="0.7" />
-                  <rect x={cp.x - 4} y={cp.y + 1} width="3" height="1.5"
-                    rx="0.5" fill="#111" />
-                  <rect x={cp.x + 1} y={cp.y + 1} width="3" height="1.5"
-                    rx="0.5" fill="#111" />
-                </g>
-              );
-            })}
-            <text
-              x={parkPolys.roofCenter.x}
-              y={parkPolys.roofCenter.y + 1}
-              textAnchor="middle"
-              fill="#888"
-              fontSize="3.5"
-              fontFamily="monospace"
-            >
-              PARKING
-            </text>
           </g>
         );
       })()}
@@ -819,101 +957,50 @@ export default function PixelMap({ onZoneSelect }: PixelMapProps) {
         const badgePos = gridToScreen(GRID_COLS - 1, GRID_ROWS - 0.5);
         return (
           <g>
+            <rect x={badgePos.x - 28} y={badgePos.y + 9}
+              width="56" height="12" rx="6" fill="#000" opacity="0.15" />
             <rect x={badgePos.x - 30} y={badgePos.y + 8}
-              width="60" height="14" rx="3" fill="#0F172A" opacity="0.85" />
-            <text x={badgePos.x} y={badgePos.y + 18}
-              textAnchor="middle" fill="#4ADE80" fontSize="5" fontFamily="monospace">
-              Guests: {movingChars.length}
+              width="60" height="12" rx="6" fill="#0A0F1E" opacity="0.85" />
+            <rect x={badgePos.x - 30} y={badgePos.y + 8}
+              width="60" height="12" rx="6" fill="none"
+              stroke="#4ADE80" strokeWidth="0.4" strokeOpacity="0.3" />
+            <text x={badgePos.x} y={badgePos.y + 16.5}
+              textAnchor="middle" fill="#4ADE80" fontSize="4.5"
+              fontFamily="system-ui, -apple-system, sans-serif" fontWeight="600">
+              {movingChars.length} Guests
             </text>
           </g>
         );
       })()}
-
-      {/* ═══ SIENNA PARK DR SW (road below the park) ═══ */}
-      {(() => {
-        const roadY = 390;
-        return (
-          <g>
-            {/* Road surface */}
-            <rect x="100" y={roadY} width="760" height="18" fill="#4A4A4A" />
-            {/* Road edge lines */}
-            <rect x="100" y={roadY} width="760" height="1" fill="#FFE066" opacity="0.5" />
-            <rect x="100" y={roadY + 17} width="760" height="1" fill="#FFE066" opacity="0.5" />
-            {/* Center dashes */}
-            {Array.from({ length: 20 }).map((_, i) => (
-              <rect key={`dash-${i}`} x={110 + i * 38} y={roadY + 8} width="20" height="1.5"
-                fill="#FFE066" opacity="0.6" />
-            ))}
-            {/* Road label */}
-            <text x="480" y={roadY + 12} textAnchor="middle" fill="#888" fontSize="4" fontFamily="monospace">
-              SIENNA PARK DR SW
-            </text>
-            {/* Sidewalk */}
-            <rect x="100" y={roadY + 18} width="760" height="6" fill="#B0A090" />
-          </g>
-        );
-      })()}
-
-      {/* ═══ Additional trees south of road ═══ */}
-      {[
-        { gx: 2, gy: 12, size: 1.0 },
-        { gx: 5, gy: 11.5, size: 1.3 },
-        { gx: 8, gy: 12, size: 0.9 },
-        { gx: 11, gy: 11.5, size: 1.1 },
-        { gx: 14, gy: 12, size: 1.0 },
-      ].map((t, i) => {
-        const pos = gridToScreen(t.gx, t.gy);
-        const s = t.size;
-        return (
-          <g key={`stree-${i}`}>
-            <rect x={pos.x - 1.5 * s} y={pos.y - 5 * s} width={3 * s} height={8 * s} fill="#5C3A1E" />
-            <ellipse cx={pos.x} cy={pos.y - 7 * s} rx={7 * s} ry={5 * s} fill="#2D5016" />
-            <ellipse cx={pos.x} cy={pos.y - 10 * s} rx={5.5 * s} ry={4 * s} fill="#3A6B1E" />
-            <ellipse cx={pos.x} cy={pos.y - 12 * s} rx={4 * s} ry={3 * s} fill="#4A7C28" />
-          </g>
-        );
-      })}
 
       {/* ═══ TITLE BANNER ═══ */}
       {(() => {
-        const bannerPos = gridToScreen(GRID_COLS / 2, GRID_ROWS + 1);
+        const bannerPos = gridToScreen(GRID_COLS / 2, GRID_ROWS + 0.5);
         return (
           <g>
+            {/* Banner shadow */}
+            <rect x={bannerPos.x - 128} y={bannerPos.y + 1}
+              width="256" height="28" rx="8" fill="#000" opacity="0.2" />
+            {/* Banner background */}
             <rect x={bannerPos.x - 130} y={bannerPos.y - 2}
-              width="260" height="30" rx="4" fill="#0F172A" opacity="0.92" />
-            <text x={bannerPos.x} y={bannerPos.y + 13}
-              textAnchor="middle" fill="#4ADE80" fontSize="7.5" fontFamily="monospace" fontWeight="bold">
+              width="260" height="30" rx="8" fill="#0A0F1E" opacity="0.88" />
+            {/* Banner border glow */}
+            <rect x={bannerPos.x - 130} y={bannerPos.y - 2}
+              width="260" height="30" rx="8" fill="none"
+              stroke="#4ADE80" strokeWidth="0.5" strokeOpacity="0.3" />
+            <text x={bannerPos.x} y={bannerPos.y + 12}
+              textAnchor="middle" fill="#4ADE80" fontSize="7"
+              fontFamily="system-ui, -apple-system, sans-serif" fontWeight="800" letterSpacing="1.5">
               SIGNAL HILL NEIGHBOUR DAY
             </text>
-            <text x={bannerPos.x} y={bannerPos.y + 23}
-              textAnchor="middle" fill="#FFE066" fontSize="5.5" fontFamily="monospace">
+            <text x={bannerPos.x} y={bannerPos.y + 22}
+              textAnchor="middle" fill="#FFE066" fontSize="5"
+              fontFamily="system-ui, -apple-system, sans-serif" fontWeight="600" letterSpacing="2">
               JUNE 21, 2026
             </text>
           </g>
         );
       })()}
-
-      {/* ═══ Houses/buildings south of road (neighborhood) ═══ */}
-      {[
-        { x: 180, y: 430, w: 30, h: 20, color: "#C4956A" },
-        { x: 300, y: 435, w: 25, h: 18, color: "#A0C4E8" },
-        { x: 420, y: 430, w: 28, h: 20, color: "#E8D0A0" },
-        { x: 540, y: 435, w: 24, h: 18, color: "#C8A0A0" },
-        { x: 660, y: 430, w: 30, h: 20, color: "#A0D0A0" },
-      ].map((h, i) => (
-        <g key={`house-${i}`}>
-          {/* House body */}
-          <rect x={h.x} y={h.y} width={h.w} height={h.h} fill={h.color} stroke="#666" strokeWidth="0.5" />
-          {/* Roof */}
-          <polygon
-            points={`${h.x - 2},${h.y} ${h.x + h.w / 2},${h.y - 8} ${h.x + h.w + 2},${h.y}`}
-            fill="#8B4513" stroke="#666" strokeWidth="0.3" />
-          {/* Window */}
-          <rect x={h.x + 4} y={h.y + 4} width="6" height="6" fill="#87CEEB" stroke="#555" strokeWidth="0.3" />
-          {/* Door */}
-          <rect x={h.x + h.w - 10} y={h.y + 8} width="6" height={h.h - 8} fill="#654321" />
-        </g>
-      ))}
     </svg>
   );
 }
