@@ -1,26 +1,193 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-pixel-green: #4ADE80;
+  --color-pixel-blue: #60A5FA;
+  --color-pixel-red: #F87171;
+  --color-pixel-yellow: #FBBF24;
+  --color-pixel-pink: #F472B6;
+  --color-pixel-purple: #A78BFA;
+  --color-pixel-cyan: #22D3EE;
+  --color-pixel-orange: #FB923C;
+  --color-rink-ice: #DBEAFE;
+  --color-rink-boards: #7C3AED;
+  --color-grass: #166534;
+  --color-sky: #0C4A6E;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #0C4A6E;
+  --foreground: #F0FDF4;
+}
+
+* {
+  image-rendering: pixelated;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Press Start 2P", monospace;
+}
+
+/* pixel border utility */
+.pixel-border {
+  box-shadow:
+    inset -4px -4px 0px 0px rgba(0, 0, 0, 0.3),
+    inset 4px 4px 0px 0px rgba(255, 255, 255, 0.2),
+    0 0 0 4px #1E293B;
+}
+
+.pixel-border-light {
+  box-shadow:
+    inset -2px -2px 0px 0px rgba(0, 0, 0, 0.2),
+    inset 2px 2px 0px 0px rgba(255, 255, 255, 0.15),
+    0 0 0 2px #334155;
+}
+
+/* pixel button */
+.pixel-btn {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  box-shadow:
+    inset -4px -4px 0px 0px rgba(0, 0, 0, 0.3),
+    inset 4px 4px 0px 0px rgba(255, 255, 255, 0.2);
+  transition: transform 0.1s;
+}
+
+.pixel-btn:hover {
+  transform: translateY(-2px);
+}
+
+.pixel-btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 4px 4px 0px 0px rgba(0, 0, 0, 0.3),
+    inset -4px -4px 0px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* bounce animation for characters */
+@keyframes pixel-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pixel-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes float-balloon {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  33% {
+    transform: translateY(-3px) translateX(2px);
+  }
+  66% {
+    transform: translateY(-1px) translateX(-2px);
+  }
+}
+
+.animate-pixel-bounce {
+  animation: pixel-bounce 0.8s ease-in-out infinite;
+}
+
+.animate-pixel-wave {
+  animation: pixel-wave 1.2s ease-in-out infinite;
+}
+
+.animate-float-balloon {
+  animation: float-balloon 2s ease-in-out infinite;
+}
+
+/* Pixel input */
+.pixel-input {
+  background: #1E293B;
+  border: 3px solid #475569;
+  padding: 10px 14px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  color: #F0FDF4;
+  outline: none;
+  width: 100%;
+}
+
+.pixel-input:focus {
+  border-color: #4ADE80;
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.3);
+}
+
+.pixel-input::placeholder {
+  color: #64748B;
+}
+
+.pixel-select {
+  background: #1E293B;
+  border: 3px solid #475569;
+  padding: 10px 14px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  color: #F0FDF4;
+  outline: none;
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.pixel-select:focus {
+  border-color: #4ADE80;
+}
+
+/* Progress bar */
+.pixel-progress {
+  background: #1E293B;
+  border: 3px solid #475569;
+  height: 28px;
+  overflow: hidden;
+}
+
+.pixel-progress-fill {
+  height: 100%;
+  transition: width 0.5s ease-out;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Map tooltip */
+.map-tooltip {
+  position: absolute;
+  background: #0F172A;
+  border: 3px solid #4ADE80;
+  padding: 8px 12px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  color: #F0FDF4;
+  pointer-events: none;
+  z-index: 50;
+  white-space: nowrap;
 }
